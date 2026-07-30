@@ -1,0 +1,3 @@
+source_url,broken_link,status
+http://example.com/,http://example.com/missing,404
+http://example.com/page1,http://example.com/old-page,301 -> redirected

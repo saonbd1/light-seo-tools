@@ -7,7 +7,7 @@ title: Request a Report
 
 Use this form to request an advanced Scrapebox-backed report. You will receive a confirmation email and the admin will process the request offline.
 
-<form action="https://formspree.io/f/your-id" method="POST" enctype="multipart/form-data">
+<form action="{{ site.formspree_endpoint | default: 'https://formspree.io/f/your-id' }}" method="POST" enctype="multipart/form-data">
   <label>Your email</label>
   <input type="email" name="email" required>
 

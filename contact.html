@@ -7,7 +7,7 @@ title: Contact
 
 If you need help or want to arrange a custom report, use the form below.
 
-<form action="https://formspree.io/f/your-id" method="POST">
+<form action="{{ site.formspree_endpoint | default: 'https://formspree.io/f/your-id' }}" method="POST">
   <label>Your email</label>
   <input type="email" name="email" required>
   <label>Message</label>

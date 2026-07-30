@@ -1,0 +1,5 @@
+url,status
+http://example.com/page1,unique
+http://example.com/page2,unique
+http://example.com/page1,duplicate
+http://example.com/page3,unique
