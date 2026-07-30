@@ -7,6 +7,7 @@ url: ""
 formspree_endpoint: "https://formspree.io/f/xaqrzqkg" # configured by user on 2026-07-31
 report_storage: "dropbox" # options: dropbox, gdrive, s3, local
 report_storage_instructions: "See INSTRUCTIONS.md for setup and upload steps"
+admin_sheet_url: "" # Paste the Google Sheets published URL here to enable the admin embed (public or link-shared).
 theme: minima
 plugins: []
 
