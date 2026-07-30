@@ -1,0 +1,32 @@
+---
+layout: default
+title: Request a Report
+---
+
+# Request a Report
+
+Use this form to request an advanced Scrapebox-backed report. You will receive a confirmation email and the admin will process the request offline.
+
+<form action="https://formspree.io/f/your-id" method="POST" enctype="multipart/form-data">
+  <label>Your email</label>
+  <input type="email" name="email" required>
+
+  <label>Report type</label>
+  <select name="report_type">
+    <option>Duplicate URL Finder (Scrapebox)</option>
+    <option>Meta Tag Scraper (Scrapebox)</option>
+    <option>Broken Link Checker</option>
+    <option>Keyword Harvest</option>
+    <option>Custom / Other</option>
+  </select>
+
+  <label>Upload URL list (optional, .txt or .csv)</label>
+  <input type="file" name="url_file" accept=".txt,.csv">
+
+  <label>Notes</label>
+  <textarea name="notes" rows="4"></textarea>
+
+  <button type="submit">Submit Request</button>
+</form>
+
+<p>Formspree action is a placeholder; replace with your Formspree endpoint or other form backend.</p>

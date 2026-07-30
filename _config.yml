@@ -1,0 +1,12 @@
+title: SEO Tools
+email: you@example.com
+description: >
+  Web-based front end for SEO tools with Scrapebox as the offline processing engine.
+baseurl: ""
+url: ""
+theme: minima
+plugins: []
+
+# Exclude sample reports from Jekyll processing
+exclude:
+  - "sample-reports/*"

@@ -1,0 +1,9 @@
+.bundle/
+_site/
+.sass-cache/
+.DS_Store
+node_modules/
+.sample-reports/
+.sample-reports/*
+.sample_reports/
+.env

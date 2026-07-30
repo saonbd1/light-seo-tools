@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ page.title | default: site.title }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/3.0.1/mini-default.min.css">
+  </head>
+  <body>
+    <header>
+      <a href="/">{{ site.title }}</a>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/tools/">Tools</a>
+        <a href="/request.html">Request a Report</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </header>
+    <main class="container">
+      {{ content }}
+    </main>
+    <footer class="container">
+      <p>&copy; {{ site.time | date: "%Y" }} {{ site.title }}</p>
+    </footer>
+  </body>
+</html>
