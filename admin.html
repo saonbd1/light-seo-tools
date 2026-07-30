@@ -9,9 +9,81 @@ This page is intended for administrators to review incoming requests and attach 
 
 {% if site.admin_sheet_url and site.admin_sheet_url != "" %}
 <p>The Google Sheet is embedded below. If it does not display, ensure the sheet is published to the web or shared with a viewable link.</p>
-<div style="width:100%; height:800px; border:1px solid #ddd;">
+<div style="width:100%; height:640px; border:1px solid #ddd; margin-bottom:16px;">
   <iframe src="{{ site.admin_sheet_url }}" style="width:100%; height:100%; border:0;" title="Admin Google Sheet"></iframe>
 </div>
+
+<!-- Admin helper UI -->
+<section aria-label="Admin helpers">
+  <h2>Quick Admin Helpers</h2>
+  <p>Use these tools to quickly add a new request row to the Google Sheet or to generate a report-link template to paste into the <em>Report Link</em> column.</p>
+
+  <div style="display:flex;gap:12px;flex-wrap:wrap;">
+    <div style="flex:1;min-width:320px;">
+      <h3>Add a Request (copy as CSV row)</h3>
+      <label>Email</label>
+      <input id="admin_email" style="width:100%" placeholder="user@example.com">
+      <label>Report Type</label>
+      <input id="admin_report_type" style="width:100%" placeholder="Duplicate URL Finder">
+      <label>Uploaded File (Y/N)</label>
+      <input id="admin_uploaded" style="width:100%" placeholder="Y or N">
+      <label>Notes</label>
+      <input id="admin_notes" style="width:100%" placeholder="Optional notes">
+      <button id="copy_row" style="margin-top:8px;">Copy CSV Row to Clipboard</button>
+      <p id="row_feedback" style="color:green;display:none;margin-top:8px;">Copied to clipboard — paste into the Google Sheet as a new row.</p>
+    </div>
+
+    <div style="flex:1;min-width:260px;">
+      <h3>Report Link Helper</h3>
+      <label>Report URL</label>
+      <input id="report_url" style="width:100%" placeholder="https://dropbox.com/your-file-link">
+      <label>Expiry days</label>
+      <input id="expiry_days" style="width:100%" placeholder="7">
+      <button id="copy_link_template" style="margin-top:8px;">Copy Report Link Template</button>
+      <p id="link_feedback" style="color:green;display:none;margin-top:8px;">Template copied — paste into the Report Link cell.</p>
+    </div>
+  </div>
+
+  <script>
+  function csvEscape(v){
+    if(v == null) return '';
+    v = String(v);
+    if(v.includes(',') || v.includes('"') || v.includes('\n')){
+      return '"'+v.replace(/"/g,'""')+'"';
+    }
+    return v;
+  }
+
+  document.getElementById('copy_row').addEventListener('click', function(){
+    const email = document.getElementById('admin_email').value.trim();
+    const type = document.getElementById('admin_report_type').value.trim();
+    const uploaded = document.getElementById('admin_uploaded').value.trim() || 'N';
+    const notes = document.getElementById('admin_notes').value.trim();
+    const ts = new Date().toISOString();
+    // Columns: Timestamp, Email, Report Type, Uploaded File (Y/N), Notes, Report Link, Status, Admin Notes
+    const row = [ts, email, type, uploaded, notes, '', 'Pending', ''].map(csvEscape).join(',');
+    navigator.clipboard.writeText(row).then(function(){
+      const fb = document.getElementById('row_feedback'); fb.style.display='block';
+      setTimeout(()=>fb.style.display='none',2500);
+    }, function(err){
+      alert('Copy failed: '+err);
+    });
+  });
+
+  document.getElementById('copy_link_template').addEventListener('click', function(){
+    const url = document.getElementById('report_url').value.trim();
+    const days = parseInt(document.getElementById('expiry_days').value) || 7;
+    const expiryText = new Date(Date.now()+days*24*60*60*1000).toISOString().split('T')[0];
+    const template = `${url} (expires: ${expiryText})`;
+    navigator.clipboard.writeText(template).then(function(){
+      const fb = document.getElementById('link_feedback'); fb.style.display='block';
+      setTimeout(()=>fb.style.display='none',2500);
+    }, function(err){
+      alert('Copy failed: '+err);
+    });
+  });
+  </script>
+</section>
 {% else %}
 <p>No Google Sheet configured yet.</p>
 <h3>How to create and publish the Google Sheet</h3>
