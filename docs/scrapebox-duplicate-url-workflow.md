@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Process a submitted URL list in Scrapebox, remove duplicate entries, and prepare an HTML, TXT, or XLSX report for delivery.
+Process a submitted URL list in Scrapebox, remove duplicate entries, and prepare an HTML, TXT, CSV, or XLSX report for delivery.
 
 ## Input requirements
 
@@ -28,6 +28,7 @@ Process a submitted URL list in Scrapebox, remove duplicate entries, and prepare
 7. Export the report in Scrapebox's supported format:
    - HTML for a readable report
    - TXT for a plain URL list
+   - CSV for structured data exchange
    - XLSX for spreadsheet analysis
 8. Preserve the original upload and text input, then record the counts below.
 
@@ -39,8 +40,6 @@ For a TXT export, use one URL per line:
 https://example.com/page-a
 https://example.com/page-a
 ```
-
-If another system requires CSV, convert Scrapebox's XLSX export to CSV after exporting it.
 
 Recommended report summary fields:
 
@@ -62,8 +61,8 @@ Recommended report summary fields:
 
 ## Delivery
 
-Upload the finished HTML, TXT, or XLSX report to private storage such as Google Drive, Dropbox, or S3. Add the private link and status to the admin Google Sheet. Use the admin page's Report Link Helper to include an expiry date in the note.
+Upload the finished HTML, TXT, CSV, or XLSX report to private storage such as Google Drive, Dropbox, or S3. Add the private link and status to the admin Google Sheet. Use the admin page's Report Link Helper to include an expiry date in the note.
 
 ## Test data
 
-Use a plain-text file with one URL per line for the Scrapebox test input. The CSV in `sample-reports/duplicate-urls-sample.csv` is only a generic example and is not a native Scrapebox import or export format. Prefer saving the real test result as HTML, TXT, or XLSX.
+Use a plain-text file with one URL per line for the Scrapebox test input. Prefer saving the real test result as HTML, TXT, CSV, or XLSX.
