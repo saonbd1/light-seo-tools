@@ -1,0 +1,13 @@
+Subject: Your SEO report is ready - {{ request_id }}
+
+Hello,
+
+Your {{ report_type }} report is ready.
+
+Download it here:
+{{ report_link }}
+
+The link expires on {{ expiry_date }}. Please download a copy before then.
+
+Regards,
+SEO Tools
