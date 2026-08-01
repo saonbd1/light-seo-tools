@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Process a submitted URL list in Scrapebox, remove duplicate entries, and prepare a clean CSV report for delivery.
+Process a submitted URL list in Scrapebox, remove duplicate entries, and prepare an HTML, TXT, or XLSX report for delivery.
 
 ## Input requirements
 
@@ -19,26 +19,30 @@ Process a submitted URL list in Scrapebox, remove duplicate entries, and prepare
 2. If the upload is CSV, extract the URL column and save it as `input-original.txt`. Preserve the original upload separately.
 3. Save the final Scrapebox input as `input-scrapebox.txt`.
 4. Open Scrapebox and import `input-scrapebox.txt` into the URL list.
-4. Normalize the list where appropriate:
+5. Normalize the list where appropriate:
    - remove blank lines
    - remove leading/trailing spaces
    - preserve or remove URL parameters consistently for the job
    - decide whether `http` and `https` should be treated as separate URLs
-5. Run Scrapebox's duplicate removal function.
-6. Export the cleaned list as `unique-urls.txt` or `unique-urls.csv`.
+6. Run Scrapebox's duplicate removal function.
+7. Export the report in Scrapebox's supported format:
+   - HTML for a readable report
+   - TXT for a plain URL list
+   - XLSX for spreadsheet analysis
 8. Preserve the original upload and text input, then record the counts below.
 
 ## Report format
 
-Use this CSV structure:
+For a TXT export, use one URL per line:
 
-```csv
-url,status
-https://example.com/page-a,unique
-https://example.com/page-a,duplicate
+```text
+https://example.com/page-a
+https://example.com/page-a
 ```
 
-Recommended summary fields:
+If another system requires CSV, convert Scrapebox's XLSX export to CSV after exporting it.
+
+Recommended report summary fields:
 
 - Request ID
 - Input filename
@@ -58,8 +62,8 @@ Recommended summary fields:
 
 ## Delivery
 
-Upload the finished report to private storage such as Google Drive, Dropbox, or S3. Add the private link and status to the admin Google Sheet. Use the admin page's Report Link Helper to include an expiry date in the note.
+Upload the finished HTML, TXT, or XLSX report to private storage such as Google Drive, Dropbox, or S3. Add the private link and status to the admin Google Sheet. Use the admin page's Report Link Helper to include an expiry date in the note.
 
 ## Test data
 
-Use a plain-text file with one URL per line for the Scrapebox test input. The CSV in `sample-reports/duplicate-urls-sample.csv` is an output/report example, not a Scrapebox import file.
+Use a plain-text file with one URL per line for the Scrapebox test input. The CSV in `sample-reports/duplicate-urls-sample.csv` is only a generic example and is not a native Scrapebox import or export format. Prefer saving the real test result as HTML, TXT, or XLSX.
