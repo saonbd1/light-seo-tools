@@ -5,26 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ page.description | default: site.description }}">
     <title>{{ page.title | default: site.title }} | {{ site.title }}</title>
-    <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/site.css">
   </head>
   <body>
     <header class="site-header">
       <div class="shell nav-wrap">
-        <a class="brand" href="{{ '/' | relative_url }}"><span class="brand-mark">L</span><span>ight SEO Tools</span></a>
+        <a class="brand" href="{{ site.baseurl }}/"><span class="brand-mark">L</span><span>ight SEO Tools</span></a>
         <nav class="site-nav" aria-label="Main navigation">
-          <a href="{{ '/' | relative_url }}">Home</a>
-          <a href="{{ '/tools/tools-overview.html' | relative_url }}">Tools</a>
-          <a href="{{ '/request.html' | relative_url }}">Request a report</a>
-          <a href="{{ '/contact.html' | relative_url }}">Contact</a>
+          <a href="{{ site.baseurl }}/">Home</a>
+          <a href="{{ site.baseurl }}/tools/tools-overview.html">Tools</a>
+          <a href="{{ site.baseurl }}/request.html">Request a report</a>
+          <a href="{{ site.baseurl }}/contact.html">Contact</a>
         </nav>
       </div>
     </header>
     <main>{{ content }}</main>
     <footer class="site-footer">
       <div class="shell footer-grid">
-        <div><a class="brand footer-brand" href="{{ '/' | relative_url }}"><span class="brand-mark">L</span><span>ight SEO Tools</span></a><p>Practical SEO data, processed clearly.</p></div>
-        <div><strong>Explore</strong><a href="{{ '/tools/tools-overview.html' | relative_url }}">All tools</a><a href="{{ '/request.html' | relative_url }}">Request a report</a></div>
-        <div><strong>Support</strong><a href="{{ '/contact.html' | relative_url }}">Contact</a><a href="{{ '/admin.html' | relative_url }}">Admin</a></div>
+        <div><a class="brand footer-brand" href="{{ site.baseurl }}/"><span class="brand-mark">L</span><span>ight SEO Tools</span></a><p>Practical SEO data, processed clearly.</p></div>
+        <div><strong>Explore</strong><a href="{{ site.baseurl }}/tools/tools-overview.html">All tools</a><a href="{{ site.baseurl }}/request.html">Request a report</a></div>
+        <div><strong>Support</strong><a href="{{ site.baseurl }}/contact.html">Contact</a><a href="{{ site.baseurl }}/admin.html">Admin</a></div>
       </div>
       <div class="shell footer-bottom"><span>&copy; {{ site.time | date: "%Y" }} Light SEO Tools</span><span>Powered by Scrapebox workflows</span></div>
     </footer>

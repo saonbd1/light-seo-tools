@@ -10,7 +10,7 @@ description: Fast browser helpers and Scrapebox-powered SEO reports for URLs, me
       <span class="eyebrow">SEO data, without the busywork</span>
       <h1>Turn messy URL lists into useful SEO insights.</h1>
       <p>Use quick browser tools for everyday tasks, or request a carefully processed Scrapebox report for larger URL lists and deeper analysis.</p>
-      <div class="actions"><a class="button" href="{{ '/tools/tools-overview.html' | relative_url }}">Explore tools</a><a class="button secondary" href="{{ '/request.html' | relative_url }}">Request a report</a></div>
+      <div class="actions"><a class="button" href="{{ site.baseurl }}/tools/tools-overview.html">Explore tools</a><a class="button secondary" href="{{ site.baseurl }}/request.html">Request a report</a></div>
     </div>
     <div class="hero-card">
       <span class="pill">Workflow snapshot</span>
@@ -26,9 +26,9 @@ description: Fast browser helpers and Scrapebox-powered SEO reports for URLs, me
   <div class="shell">
     <div class="section-heading"><div><span class="eyebrow">Start here</span><h2>Tools built around real SEO workflows</h2></div><p>Small tasks can be instant. Larger jobs are processed offline and delivered as a clear report.</p></div>
     <div class="cards">
-      <article class="card"><div class="icon">01</div><h3>Duplicate URL Finder</h3><p>Clean repeated entries in your browser or request a Scrapebox unique-URL export.</p><p><a href="{{ '/tools/duplicate-url-finder.html' | relative_url }}">Try the helper →</a></p></article>
-      <article class="card"><div class="icon">02</div><h3>Meta Tag Generator</h3><p>Generate basic title and description HTML for a page in seconds.</p><p><a href="{{ '/tools/meta-tag-generator.html' | relative_url }}">Open generator →</a></p></article>
-      <article class="card"><div class="icon">03</div><h3>Scrapebox reports</h3><p>Submit a URL list for duplicate removal or metadata extraction and receive a private report link.</p><p><a href="{{ '/request.html' | relative_url }}">Request analysis →</a></p></article>
+      <article class="card"><div class="icon">01</div><h3>Duplicate URL Finder</h3><p>Clean repeated entries in your browser or request a Scrapebox unique-URL export.</p><p><a href="{{ site.baseurl }}/tools/duplicate-url-finder.html">Try the helper →</a></p></article>
+      <article class="card"><div class="icon">02</div><h3>Meta Tag Generator</h3><p>Generate basic title and description HTML for a page in seconds.</p><p><a href="{{ site.baseurl }}/tools/meta-tag-generator.html">Open generator →</a></p></article>
+      <article class="card"><div class="icon">03</div><h3>Scrapebox reports</h3><p>Submit a URL list for duplicate removal or metadata extraction and receive a private report link.</p><p><a href="{{ site.baseurl }}/request.html">Request analysis →</a></p></article>
     </div>
   </div>
 </section>
@@ -45,4 +45,4 @@ description: Fast browser helpers and Scrapebox-powered SEO reports for URLs, me
   </div>
 </section>
 
-<section class="section"><div class="shell"><div class="cta"><div><span class="eyebrow">Ready to start?</span><h2>Send your first URL list.</h2><p>Start with duplicate URL cleanup or a metadata report.</p></div><a class="button" href="{{ '/request.html' | relative_url }}">Request a report</a></div></div></section>
+<section class="section"><div class="shell"><div class="cta"><div><span class="eyebrow">Ready to start?</span><h2>Send your first URL list.</h2><p>Start with duplicate URL cleanup or a metadata report.</p></div><a class="button" href="{{ site.baseurl }}/request.html">Request a report</a></div></div></section>

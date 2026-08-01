@@ -8,14 +8,14 @@ description: Browser helpers and Scrapebox-backed SEO report workflows.
 <section class="content"><div class="shell">
   <div class="section-heading"><div><span class="eyebrow">Instant tools</span><h2>Use in your browser</h2></div></div>
   <div class="tool-grid">
-    <article class="card tool-card"><span class="pill">Free helper</span><h3>Duplicate URL Finder</h3><p>Remove repeated URL entries locally in your browser.</p><a class="button secondary" href="{{ '/tools/duplicate-url-finder.html' | relative_url }}">Open tool</a></article>
-    <article class="card tool-card"><span class="pill">Free helper</span><h3>Meta Tag Generator</h3><p>Generate basic title and description tags for HTML.</p><a class="button secondary" href="{{ '/tools/meta-tag-generator.html' | relative_url }}">Open tool</a></article>
+    <article class="card tool-card"><span class="pill">Free helper</span><h3>Duplicate URL Finder</h3><p>Remove repeated URL entries locally in your browser.</p><a class="button secondary" href="{{ site.baseurl }}/tools/duplicate-url-finder.html">Open tool</a></article>
+    <article class="card tool-card"><span class="pill">Free helper</span><h3>Meta Tag Generator</h3><p>Generate basic title and description tags for HTML.</p><a class="button secondary" href="{{ site.baseurl }}/tools/meta-tag-generator.html">Open tool</a></article>
   </div>
   <div class="section-heading" style="margin-top:60px"><div><span class="eyebrow">Scrapebox workflows</span><h2>Request a processed report</h2></div></div>
   <div class="tool-grid">
-    <article class="card tool-card"><span class="pill">Report preview</span><h3>Duplicate URL Report</h3><p>Receive a cleaned unique-URL export in HTML, TXT, CSV, or XLSX.</p><a class="button secondary" href="{{ '/tools/duplicate-url-report.html' | relative_url }}">View preview</a></article>
-    <article class="card tool-card"><span class="pill">Report preview</span><h3>Meta Tag Scraper</h3><p>Extract URL, title, description, and optional page fields.</p><a class="button secondary" href="{{ '/tools/meta-tag-scraper.html' | relative_url }}">View preview</a></article>
-    <article class="card tool-card"><span class="pill">Coming next</span><h3>Broken Link Checker</h3><p>Request a crawl report for broken and redirected links.</p><a class="button secondary" href="{{ '/request.html' | relative_url }}">Request workflow</a></article>
+    <article class="card tool-card"><span class="pill">Report preview</span><h3>Duplicate URL Report</h3><p>Receive a cleaned unique-URL export in HTML, TXT, CSV, or XLSX.</p><a class="button secondary" href="{{ site.baseurl }}/tools/duplicate-url-report.html">View preview</a></article>
+    <article class="card tool-card"><span class="pill">Report preview</span><h3>Meta Tag Scraper</h3><p>Extract URL, title, description, and optional page fields.</p><a class="button secondary" href="{{ site.baseurl }}/tools/meta-tag-scraper.html">View preview</a></article>
+    <article class="card tool-card"><span class="pill">Coming next</span><h3>Broken Link Checker</h3><p>Request a crawl report for broken and redirected links.</p><a class="button secondary" href="{{ site.baseurl }}/request.html">Request workflow</a></article>
   </div>
-  <div class="card" style="margin-top:24px"><h3>More tools planned</h3><p>Keyword generation, link extraction, sitemap scraping, index checking, domain utilities, anchor text tools, and more will be added as workflows are documented and tested.</p><a href="{{ '/request.html' | relative_url }}">Request a custom report →</a></div>
+  <div class="card" style="margin-top:24px"><h3>More tools planned</h3><p>Keyword generation, link extraction, sitemap scraping, index checking, domain utilities, anchor text tools, and more will be added as workflows are documented and tested.</p><a href="{{ site.baseurl }}/request.html">Request a custom report →</a></div>
 </div></section>
