@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Process a submitted URL list in Scrapebox, remove duplicate entries, and prepare an HTML, TXT, CSV, or XLSX report for delivery.
+Process a submitted URL list in Scrapebox, remove duplicate entries, and deliver Scrapebox's unique-URL export in HTML, TXT, CSV, or XLSX format.
 
 ## Input requirements
 
@@ -41,22 +41,22 @@ https://example.com/page-a
 https://example.com/page-a
 ```
 
-Recommended report summary fields:
+Optional service summary fields:
 
 - Request ID
 - Input filename
 - Input URL count
 - Unique URL count
-- Duplicate URL count
+- Duplicate URL count (calculated from input count minus unique count)
 - Processing date
 - Normalization rules used
 
 ## Quality checks
 
 - Confirm the output file opens correctly.
-- Confirm every output row is a valid URL or is clearly marked as invalid.
+- Confirm every output row is a valid unique URL.
 - Compare the input and output counts.
-- Spot-check duplicate groups.
+- Confirm the output contains no repeated URLs.
 - Do not publish client URLs in the public GitHub repository.
 
 ## Delivery
