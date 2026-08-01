@@ -8,9 +8,9 @@ title: Meta Tag Generator
 Enter a title and description to generate basic meta tags for HTML.
 
 <label>Title</label>
-<input id="title" style="width:100%" placeholder="Page title">
+<input id="title" class="tool-input" placeholder="Page title">
 <label>Description</label>
-<textarea id="desc" rows="4" style="width:100%" placeholder="Page description"></textarea>
+<textarea id="desc" class="tool-input" rows="4" placeholder="Page description"></textarea>
 <button id="gen">Generate Meta Tags</button>
 
 <h3>Output</h3>
