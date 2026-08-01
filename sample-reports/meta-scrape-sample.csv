@@ -1,4 +1,4 @@
-url,title,description
-http://example.com/,Example Site,This is an example description for the homepage.
-http://example.com/page1,Page One,Description for page one.
-http://example.com/page2,Page Two,Description for page two.
+Url,Title,Description
+https://example.com/,Example Domain,
+https://www.wikipedia.org/,Wikipedia,"Wikipedia is a free online encyclopedia, created and edited by volunteers around the world and hosted by the Wikimedia Foundation."
+https://www.iana.org/domains/example,Example Domains,

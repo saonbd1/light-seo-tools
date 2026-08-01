@@ -1,18 +1,14 @@
 ---
 layout: default
 title: Contact
+description: Contact Light SEO Tools for help with SEO report workflows.
 ---
 
-# Contact
-
-If you need help or want to arrange a custom report, use the form below.
-
-<form action="{{ site.formspree_endpoint | default: 'https://formspree.io/f/your-id' }}" method="POST">
-  <label>Your email</label>
-  <input type="email" name="email" required>
-  <label>Message</label>
-  <textarea name="message" rows="5"></textarea>
-  <button type="submit">Send</button>
-</form>
-
-<p>Replace the Formspree action URL with your own Formspree form endpoint.</p>
+<section class="page-hero"><div class="shell"><span class="eyebrow">Support</span><h1>Have a question?</h1><p>Ask about a workflow, report format, or custom URL analysis.</p></div></section>
+<section class="content"><div class="shell form-shell"><div class="card form-card">
+  <form action="{{ site.formspree_endpoint | default: 'https://formspree.io/f/your-id' }}" method="POST">
+    <label for="contact-email">Your email</label><input id="contact-email" type="email" name="email" placeholder="you@example.com" required>
+    <label for="message">Message</label><textarea id="message" name="message" rows="7" placeholder="How can we help?" required></textarea>
+    <button class="button" type="submit">Send message</button>
+  </form>
+</div></div></section>

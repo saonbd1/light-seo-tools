@@ -1,32 +1,17 @@
 ---
 layout: default
-title: Request a Report
+title: Request a report
+description: Submit a URL list for a Scrapebox-backed SEO report.
 ---
 
-# Request a Report
-
-Use this form to request an advanced Scrapebox-backed report. You will receive a confirmation email and the admin will process the request offline.
-
-<form action="{{ site.formspree_endpoint | default: 'https://formspree.io/f/your-id' }}" method="POST" enctype="multipart/form-data">
-  <label>Your email</label>
-  <input type="email" name="email" required>
-
-  <label>Report type</label>
-  <select name="report_type">
-    <option>Duplicate URL Finder (Scrapebox)</option>
-    <option>Meta Tag Scraper (Scrapebox)</option>
-    <option>Broken Link Checker</option>
-    <option>Keyword Harvest</option>
-    <option>Custom / Other</option>
-  </select>
-
-  <label>Upload URL list (optional, .txt or .csv)</label>
-  <input type="file" name="url_file" accept=".txt,.csv">
-
-  <label>Notes</label>
-  <textarea name="notes" rows="4"></textarea>
-
-  <button type="submit">Submit Request</button>
-</form>
-
-<p>Formspree action is a placeholder; replace with your Formspree endpoint or other form backend.</p>
+<section class="page-hero"><div class="shell"><span class="eyebrow">Scrapebox processing</span><h1>Request a report.</h1><p>Send your list and we will process it offline, quality-check the export, and deliver a private download link.</p></div></section>
+<section class="content"><div class="shell form-shell"><div class="card form-card">
+  <div class="notice">For Scrapebox workflows, upload a plain-text <strong>.txt</strong> file with one URL per line.</div>
+  <form action="{{ site.formspree_endpoint | default: 'https://formspree.io/f/your-id' }}" method="POST" enctype="multipart/form-data">
+    <label for="email">Your email</label><input id="email" type="email" name="email" placeholder="you@example.com" required>
+    <label for="report_type">Report type</label><select id="report_type" name="report_type"><option>Duplicate URL Finder</option><option>Meta Tag Scraper</option><option>Broken Link Checker</option><option>Keyword Harvest</option><option>Custom / Other</option></select>
+    <label for="url_file">URL list (.txt)</label><input id="url_file" type="file" name="url_file" accept=".txt" required>
+    <label for="notes">Notes</label><textarea id="notes" name="notes" rows="5" placeholder="Tell us about the list or fields you need."></textarea>
+    <button class="button" type="submit">Submit request</button>
+  </form>
+</div></div></section>

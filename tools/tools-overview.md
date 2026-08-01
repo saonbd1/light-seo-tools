@@ -1,57 +1,21 @@
 ---
 layout: default
-title: Tools Overview
+title: Tools
+description: Browser helpers and Scrapebox-backed SEO report workflows.
 ---
 
-# Tools Overview
-
-This site offers both free browser-side helpers and advanced Scrapebox-backed reports. The advanced reports are processed offline and delivered via email or private download links.
-
-## Free quick helpers included on site
-- [Duplicate URL Finder (client-side)]({{ site.baseurl }}/tools/duplicate-url-finder.html)
-- [Meta Tag Generator (client-side)]({{ site.baseurl }}/tools/meta-tag-generator.html)
-- Keyword idea generator (can be added as JS)
-
-## Completed Scrapebox workflow previews
-- [Duplicate URL Report](duplicate-url-report.html) — cleaned unique URL export
-- [Meta Tag Scraper Report](meta-tag-scraper.html) — URL, title, and description export
-
-## Advanced reports (Scrapebox-backed)
-(Full list — plan to implement over time)
-
-- Alexa Rank Checker
-- Alive Url Checker
-- Anchor Text Checker
-- Article Scraper
-- Bandwidth Meter
-- Bing meta scraper
-- Bing Image grabber
-- Broken link checker
-- Dofollow link tester
-- Domain resolver tool
-- Merge Duplicate links
-- Link extractor tool
-- Mass url shortener
-- Outbound link checker
-- Redirect checker
-- Sitemap scraper
-- Social account scraper
-- Vanity name checker
-- Whois scraper
-- Tdname scrapper
-- Google index checker
-- Bing index checker
-- Check unregistered domain
-- Bulk nameserver extractor
-- Trim url to domain level
-- Trim url to root
-- Trim url to first folder
-- Name generator
-- Email generator
-- Bulk anchor text creator
-- Remove duplicate entries
-- Split text file
-- Sort text files
-- Extract url links
-
-Each advanced report should have a template for input and a standardized report template for output (CSV/HTML).
+<section class="page-hero"><div class="shell"><span class="eyebrow">Tool library</span><h1>Choose the right workflow.</h1><p>Use a quick helper for small jobs, or request a Scrapebox report for larger URL lists and deeper analysis.</p></div></section>
+<section class="content"><div class="shell">
+  <div class="section-heading"><div><span class="eyebrow">Instant tools</span><h2>Use in your browser</h2></div></div>
+  <div class="tool-grid">
+    <article class="card tool-card"><span class="pill">Free helper</span><h3>Duplicate URL Finder</h3><p>Remove repeated URL entries locally in your browser.</p><a class="button secondary" href="{{ '/tools/duplicate-url-finder.html' | relative_url }}">Open tool</a></article>
+    <article class="card tool-card"><span class="pill">Free helper</span><h3>Meta Tag Generator</h3><p>Generate basic title and description tags for HTML.</p><a class="button secondary" href="{{ '/tools/meta-tag-generator.html' | relative_url }}">Open tool</a></article>
+  </div>
+  <div class="section-heading" style="margin-top:60px"><div><span class="eyebrow">Scrapebox workflows</span><h2>Request a processed report</h2></div></div>
+  <div class="tool-grid">
+    <article class="card tool-card"><span class="pill">Report preview</span><h3>Duplicate URL Report</h3><p>Receive a cleaned unique-URL export in HTML, TXT, CSV, or XLSX.</p><a class="button secondary" href="{{ '/tools/duplicate-url-report.html' | relative_url }}">View preview</a></article>
+    <article class="card tool-card"><span class="pill">Report preview</span><h3>Meta Tag Scraper</h3><p>Extract URL, title, description, and optional page fields.</p><a class="button secondary" href="{{ '/tools/meta-tag-scraper.html' | relative_url }}">View preview</a></article>
+    <article class="card tool-card"><span class="pill">Coming next</span><h3>Broken Link Checker</h3><p>Request a crawl report for broken and redirected links.</p><a class="button secondary" href="{{ '/request.html' | relative_url }}">Request workflow</a></article>
+  </div>
+  <div class="card" style="margin-top:24px"><h3>More tools planned</h3><p>Keyword generation, link extraction, sitemap scraping, index checking, domain utilities, anchor text tools, and more will be added as workflows are documented and tested.</p><a href="{{ '/request.html' | relative_url }}">Request a custom report →</a></div>
+</div></section>
