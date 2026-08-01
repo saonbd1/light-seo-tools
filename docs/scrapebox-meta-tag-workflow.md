@@ -11,6 +11,12 @@ Process a plain-text URL list in Scrapebox and export page metadata for delivery
 - Preserve the original submitted file
 - Process only URLs that you are authorized to analyze
 
+For a safe test, import:
+
+`sample-inputs/meta-tags-sample-urls.txt`
+
+This file includes a deliberate duplicate URL so you can verify how the workflow handles repeated inputs.
+
 ## Scrapebox procedure
 
 1. Create a request folder using the request ID.
