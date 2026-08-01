@@ -8,9 +8,13 @@ title: Tools Overview
 This site offers both free browser-side helpers and advanced Scrapebox-backed reports. The advanced reports are processed offline and delivered via email or private download links.
 
 ## Free quick helpers included on site
-- Duplicate URL Finder (client-side)
-- Meta Tag Generator (client-side)
+- [Duplicate URL Finder (client-side)]({{ site.baseurl }}/tools/duplicate-url-finder.html)
+- [Meta Tag Generator (client-side)]({{ site.baseurl }}/tools/meta-tag-generator.html)
 - Keyword idea generator (can be added as JS)
+
+## Completed Scrapebox workflow previews
+- [Duplicate URL Report](duplicate-url-report.html) — cleaned unique URL export
+- [Meta Tag Scraper Report](meta-tag-scraper.html) — URL, title, and description export
 
 ## Advanced reports (Scrapebox-backed)
 (Full list — plan to implement over time)
