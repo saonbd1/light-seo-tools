@@ -6,7 +6,8 @@ Process a submitted URL list in Scrapebox, remove duplicate entries, and prepare
 
 ## Input requirements
 
-- Accepted files: `.txt` or `.csv`
+- Scrapebox input file: `.txt` only
+- Website uploads may accept `.txt` or `.csv`, but CSV uploads must be converted to plain text before importing into Scrapebox.
 - One URL per line is preferred.
 - Keep the original upload unchanged.
 - Use only URLs that you are authorized to process.
@@ -15,8 +16,9 @@ Process a submitted URL list in Scrapebox, remove duplicate entries, and prepare
 
 1. Create a job folder named with the request ID, for example:
    `requests/2026-08-01-0001-duplicate-urls/`
-2. Save the uploaded file as `input-original.txt` or `input-original.csv`.
-3. Open Scrapebox and import the URLs into the URL list.
+2. If the upload is CSV, extract the URL column and save it as `input-original.txt`. Preserve the original upload separately.
+3. Save the final Scrapebox input as `input-scrapebox.txt`.
+4. Open Scrapebox and import `input-scrapebox.txt` into the URL list.
 4. Normalize the list where appropriate:
    - remove blank lines
    - remove leading/trailing spaces
@@ -24,7 +26,7 @@ Process a submitted URL list in Scrapebox, remove duplicate entries, and prepare
    - decide whether `http` and `https` should be treated as separate URLs
 5. Run Scrapebox's duplicate removal function.
 6. Export the cleaned list as `unique-urls.txt` or `unique-urls.csv`.
-7. Preserve the original list and record the counts below.
+8. Preserve the original upload and text input, then record the counts below.
 
 ## Report format
 
@@ -60,4 +62,4 @@ Upload the finished report to private storage such as Google Drive, Dropbox, or 
 
 ## Test data
 
-Use `sample-reports/duplicate-urls-sample.csv` only for a test run. Replace it with a real Scrapebox export after the workflow is verified.
+Use a plain-text file with one URL per line for the Scrapebox test input. The CSV in `sample-reports/duplicate-urls-sample.csv` is an output/report example, not a Scrapebox import file.
