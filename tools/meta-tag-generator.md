@@ -3,18 +3,16 @@ layout: default
 title: Meta Tag Generator
 ---
 
-# Meta Tag Generator
-
-Enter a title and description to generate basic meta tags for HTML.
-
-<label>Title</label>
-<input id="title" class="tool-input" placeholder="Page title">
-<label>Description</label>
-<textarea id="desc" class="tool-input" rows="4" placeholder="Page description"></textarea>
-<button id="gen">Generate Meta Tags</button>
-
-<h3>Output</h3>
-<pre id="out"></pre>
+<section class="page-hero"><div class="shell"><span class="eyebrow">Free browser helper</span><h1>Meta Tag Generator</h1><p>Generate basic title and description tags for HTML.</p></div></section>
+<section class="content"><div class="shell tool-page"><div class="card tool-form">
+  <label for="title">Title</label>
+  <input id="title" class="tool-input" placeholder="Page title">
+  <label for="desc">Description</label>
+  <textarea id="desc" class="tool-input" rows="4" placeholder="Page description"></textarea>
+  <button class="button" id="gen">Generate Meta Tags</button>
+  <h3>Output</h3>
+  <pre id="out"></pre>
+</div></div></section>
 
 <script>
 document.getElementById('gen').addEventListener('click', function(){
