@@ -5,10 +5,4 @@ description: Contact Light SEO Tools for help with SEO report workflows.
 ---
 
 <section class="page-hero"><div class="shell"><span class="eyebrow">Support</span><h1>Have a question?</h1><p>Ask about a workflow, report format, or custom URL analysis.</p></div></section>
-<section class="content"><div class="shell form-shell"><div class="card form-card">
-  <form action="{{ site.formspree_endpoint | default: 'https://formspree.io/f/your-id' }}" method="POST">
-    <label for="contact-email">Your email</label><input id="contact-email" type="email" name="email" placeholder="you@example.com" required>
-    <label for="message">Message</label><textarea id="message" name="message" rows="7" placeholder="How can we help?" required></textarea>
-    <button class="button" type="submit">Send message</button>
-  </form>
-</div></div></section>
+<section class="content"><div class="shell form-layout"><aside class="context-panel"><span class="eyebrow">Need a workflow?</span><h2>Let’s make the next step clear.</h2><p>Tell us what you’re working with and what you want to learn from your URL list.</p><ul><li>Report format questions</li><li>Custom analysis ideas</li><li>Help choosing a tool</li></ul></aside><div class="form-shell"><div class="card form-card"><form action="{{ site.formspree_endpoint | default: 'https://formspree.io/f/your-id' }}" method="POST"><label for="contact-email">Your email</label><input id="contact-email" type="email" name="email" placeholder="you@example.com" required><label for="message">Message</label><textarea id="message" name="message" rows="7" placeholder="How can we help?" required></textarea><button class="button" type="submit">Send message</button></form></div></div></div></section>

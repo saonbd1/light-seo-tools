@@ -8,21 +8,19 @@
     <link rel="stylesheet" href="{{ site.baseurl }}/assets/site.css">
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header">
       <div class="shell nav-wrap">
-        <a class="brand" href="{{ site.baseurl }}/"><span class="brand-mark">L</span><span>ight SEO Tools</span></a>
+        <a class="brand" href="{{ site.baseurl }}/"><span class="brand-mark">L</span><span>Light SEO Tools</span></a>
         <nav class="site-nav" aria-label="Main navigation">
-          <a href="{{ site.baseurl }}/">Home</a>
-          <a href="{{ site.baseurl }}/tools/tools-overview.html">Tools</a>
-          <a href="{{ site.baseurl }}/request.html">Request a report</a>
-          <a href="{{ site.baseurl }}/contact.html">Contact</a>
+          <a href="{{ site.baseurl }}/">Home</a><a href="{{ site.baseurl }}/tools/tools-overview.html">Tools</a><a href="{{ site.baseurl }}/request.html">Request a report</a><a href="{{ site.baseurl }}/contact.html">Contact</a>
         </nav>
       </div>
     </header>
-    <main>{{ content }}</main>
+    <main id="main-content">{{ content }}</main>
     <footer class="site-footer">
       <div class="shell footer-grid">
-        <div><a class="brand footer-brand" href="{{ site.baseurl }}/"><span class="brand-mark">L</span><span>ight SEO Tools</span></a><p>Practical SEO data, processed clearly.</p></div>
+        <div><a class="brand footer-brand" href="{{ site.baseurl }}/"><span class="brand-mark">L</span><span>Light SEO Tools</span></a><p>Practical SEO data, processed clearly.</p></div>
         <div><strong>Explore</strong><a href="{{ site.baseurl }}/tools/tools-overview.html">All tools</a><a href="{{ site.baseurl }}/request.html">Request a report</a></div>
         <div><strong>Support</strong><a href="{{ site.baseurl }}/contact.html">Contact</a><a href="{{ site.baseurl }}/admin.html">Admin</a></div>
       </div>

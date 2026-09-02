@@ -5,13 +5,4 @@ description: Submit a URL list for a Scrapebox-backed SEO report.
 ---
 
 <section class="page-hero"><div class="shell"><span class="eyebrow">Scrapebox processing</span><h1>Request a report.</h1><p>Send your list and we will process it offline, quality-check the export, and deliver a private download link.</p></div></section>
-<section class="content"><div class="shell form-shell"><div class="card form-card">
-  <div class="notice">For Scrapebox workflows, upload a plain-text <strong>.txt</strong> file with one URL per line.</div>
-  <form action="{{ site.formspree_endpoint | default: 'https://formspree.io/f/your-id' }}" method="POST" enctype="multipart/form-data">
-    <label for="email">Your email</label><input id="email" type="email" name="email" placeholder="you@example.com" required>
-    <label for="report_type">Report type</label><select id="report_type" name="report_type"><option>Duplicate URL Finder</option><option>Meta Tag Scraper</option><option>Broken Link Checker</option><option>Keyword Harvest</option><option>Custom / Other</option></select>
-    <label for="url_file">URL list (.txt)</label><input id="url_file" type="file" name="url_file" accept=".txt" required>
-    <label for="notes">Notes</label><textarea id="notes" name="notes" rows="5" placeholder="Tell us about the list or fields you need."></textarea>
-    <button class="button" type="submit">Submit request</button>
-  </form>
-</div></div></section>
+<section class="content"><div class="shell form-layout"><aside class="context-panel"><span class="eyebrow">What happens next</span><h2>From URL list to clean export.</h2><p>Share the essentials and we’ll take care of the processing workflow.</p><ul><li>Upload one URL per line in a plain-text file.</li><li>Choose the report fields you need.</li><li>Receive a private download link.</li></ul></aside><div class="form-shell"><div class="card form-card"><div class="notice">For Scrapebox workflows, upload a plain-text <strong>.txt</strong> file with one URL per line.</div><form action="{{ site.formspree_endpoint | default: 'https://formspree.io/f/your-id' }}" method="POST" enctype="multipart/form-data"><label for="email">Your email</label><input id="email" type="email" name="email" placeholder="you@example.com" required><label for="report_type">Report type</label><select id="report_type" name="report_type"><option>Duplicate URL Finder</option><option>Meta Tag Scraper</option><option>Broken Link Checker</option><option>Keyword Harvest</option><option>Custom / Other</option></select><label for="url_file">URL list (.txt)</label><input id="url_file" type="file" name="url_file" accept=".txt" required><label for="notes">Notes</label><textarea id="notes" name="notes" rows="5" placeholder="Tell us about the list or fields you need."></textarea><button class="button" type="submit">Submit request</button></form></div></div></div></section>
