@@ -1,0 +1,8 @@
+{
+  "name": "light-seo-tools",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "build": "node -e \"console.log('Static Jekyll site: no Node build step required')\""
+  }
+}
