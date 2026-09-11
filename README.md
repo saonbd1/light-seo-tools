@@ -1,16 +1,50 @@
-SEO Tools Website (Jekyll)
+<article class="card tool-card"><span class="pill">Free helper · 04</span><h3>Redirect Checker</h3><p>Check URLs for 301, 302, and other redirect status codes instantly.</p><a class="button secondary" href="{{ site.baseurl }}/tools/redirect-checker.html">Open tool</a></article>Tools Overview
 
-This repository contains a Jekyll site skeleton for the SEO tools website that uses Scrapebox as an offline processing engine.
+This folder contains individual pages for each tool. The site offers lightweight browser-side helpers and a set of advanced, Scrapebox-backed report types. The advanced types are processed offline and delivered as downloadable CSV/HTML/PDF.
 
-Next steps to publish:
-1. Initialize a git repository in this folder:
-   git init
-   git add .
-   git commit -m "Initial Jekyll site skeleton"
-2. Create a GitHub repository (name it e.g. seo-tools-site) and follow instructions to push:
-   git remote add origin https://github.com/USERNAME/REPO.git
-   git push -u origin main
-3. In the GitHub repo settings -> Pages, enable GitHub Pages (use branch main / root).
-4. Replace the Formspree action in contact.html with your Formspree form endpoint.
+**Implemented Browser Helpers (Free):**
 
-If you'd like, provide the GitHub username and desired repo name and I can produce the exact commands or help create the remote repository via the GitHub web UI.
+- Duplicate URL Finder - Remove repeated URL entries locally in your browser
+- Meta Tag Generator - Generate basic title and description tags for HTML
+- Link Extractor - Extract internal URLs from a starting page up to three crawl levels deep
+- Redirect Checker - Check URLs for 301, 302, and other redirect status codes instantly
+
+**Scrapebox-Backed Reports:**
+
+- Duplicate URL Report - Receive a cleaned unique-URL export in HTML, TXT, CSV, or XLSX
+- Meta Tag Scraper - Extract URL, title, description, and optional page fields
+- Broken Link Checker - Request a crawl report for broken and redirected links
+
+**Planned Tool Inventory:**
+
+- Alexa Rank Checker
+- Alive Url Checker
+- Anchor Text Checker
+- Article Scraper
+- Bandwidth Meter
+- Bing meta scraper
+- Bing Image grabber
+- Dofollow link tester
+- Domain resolver tool
+- Merge Duplicate links
+- Mass url shortener
+- Outbound link checker
+- Sitemap scraper
+- Social account scraper
+- Vanity name checker
+- Whois scraper
+- Tdname scrapper
+- Google index checker
+- Bing index checker
+- Check unregistered domain
+- Bulk nameserver extractor
+- Trim url to domain level
+- Trim url to root
+- Trim url to first folder
+- Name generator
+- Email generator
+- Bulk anchor text creator
+- Remove duplicate entries
+- Split text file
+- Sort text files
+- Extract url links
