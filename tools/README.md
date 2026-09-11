@@ -1,8 +1,21 @@
-Tools Overview
+<article class="card tool-card"><span class="pill">Free helper · 04</span><h3>Redirect Checker</h3><p>Check URLs for 301, 302, and other redirect status codes instantly.</p><a class="button secondary" href="{{ site.baseurl }}/tools/redirect-checker.html">Open tool</a></article>Tools Overview
 
 This folder contains individual pages for each tool. The site offers lightweight browser-side helpers and a set of advanced, Scrapebox-backed report types. The advanced types are processed offline and delivered as downloadable CSV/HTML/PDF.
 
-Expanded tool inventory (planned):
+**Implemented Browser Helpers (Free):**
+
+- Duplicate URL Finder - Remove repeated URL entries locally in your browser
+- Meta Tag Generator - Generate basic title and description tags for HTML
+- Link Extractor - Extract internal URLs from a starting page up to three crawl levels deep
+- Redirect Checker - Check URLs for 301, 302, and other redirect status codes instantly
+
+**Scrapebox-Backed Reports:**
+
+- Duplicate URL Report - Receive a cleaned unique-URL export in HTML, TXT, CSV, or XLSX
+- Meta Tag Scraper - Extract URL, title, description, and optional page fields
+- Broken Link Checker - Request a crawl report for broken and redirected links
+
+**Planned Tool Inventory:**
 
 - Alexa Rank Checker
 - Alive Url Checker
@@ -11,14 +24,11 @@ Expanded tool inventory (planned):
 - Bandwidth Meter
 - Bing meta scraper
 - Bing Image grabber
-- Broken link checker
 - Dofollow link tester
 - Domain resolver tool
 - Merge Duplicate links
-- Link extractor tool
 - Mass url shortener
 - Outbound link checker
-- Redirect checker
 - Sitemap scraper
 - Social account scraper
 - Vanity name checker
@@ -38,5 +48,3 @@ Expanded tool inventory (planned):
 - Split text file
 - Sort text files
 - Extract url links
-
-The immediate site will include quick browser helpers for duplicate removal, meta tag generation, and keyword idea generation. Advanced tools will be available via the Request a Report workflow.
