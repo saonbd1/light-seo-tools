@@ -8,6 +8,7 @@ This folder contains individual pages for each tool. The site offers lightweight
 - Meta Tag Generator - Generate basic title and description tags for HTML
 - Link Extractor - Extract internal URLs from a starting page up to three crawl levels deep
 - Redirect Checker - Check URLs for 301, 302, and other redirect status codes instantly
+- Robots.txt Checker & Generator - Inspect a site's robots.txt and generate custom crawler directives
 
 **Scrapebox-Backed Reports:**
 
