@@ -6,7 +6,7 @@ title: Redirect Checker
 <div class="page-hero">
   <div class="shell">
     <h1>Redirect Checker</h1>
-    <p class="hero-description">Check URLs for redirects instantly in your browser. See status codes, follow chains, and detect 301, 302, and other redirect types.</p>
+    <p class="hero-description">Check URLs for redirects instantly in your browser. See where each URL lands and its final status.</p>
   </div>
 </div>
 
@@ -15,8 +15,8 @@ title: Redirect Checker
       <div class="tool-section">
         <div class="tool-panel">
           <h2 class="section-title">Input URLs</h2>
-          <p class="section-desc">Paste one URL per line. The tool will check each URL for redirect responses.</p>
-          <textarea id="input" class="tool-input" rows="12" placeholder="https://example.com/page1&#10;https://example.com/page2&#10;https://redirect.example.com"></textarea>
+          <p class="section-desc">Paste one URL per line. The tool will check each URL for redirects.</p>
+          <textarea id="input" class="tool-input" rows="12" placeholder="https://example.com/page1&#10;http://example.com&#10;https://redirect.example.com"></textarea>
           <div class="tool-actions">
             <button id="check" class="btn-primary">Check Redirects</button>
             <button id="clear" class="btn-secondary">Clear</button>
@@ -25,7 +25,7 @@ title: Redirect Checker
 
         <div class="tool-panel">
           <h2 class="section-title">Results</h2>
-          <p class="section-desc">Status codes, redirect chains, and final URLs for each input.</p>
+          <p class="section-desc">Final URL and status for each input.</p>
           <div class="result-meta" id="meta" style="display:none;">
             <span class="meta-item"><strong id="checked-count">0</strong> URLs checked</span>
             <span class="meta-item"><strong id="redirect-count">0</strong> redirects found</span>
@@ -40,7 +40,7 @@ title: Redirect Checker
       </div>
 
       <div class="tool-callout">
-        <strong>How it works:</strong> URL checks are run through a server-side proxy so redirect status codes and headers are visible regardless of the target site's CORS policy. For comprehensive redirect analysis across large lists, <a href="{{ site.baseurl }}/request.html">request a Scrapebox report</a>.
+        <strong>Browser limitation:</strong> Checks run through a public CORS proxy, which follows redirects and reports the final URL and status. It may not expose every intermediate hop (for example 301 vs 302), and the free proxy can be slow or rate-limited. For full redirect-chain analysis, <a href="{{ site.baseurl }}/request.html">request a Scrapebox report</a>.
       </div>
     </div>
 </div>
@@ -96,27 +96,31 @@ title: Redirect Checker
   color: var(--muted);
   font-size: 0.8rem;
 }
-
-.redirect-chain-step {
-  padding: 3px 0 3px 12px;
-  border-left: 2px solid var(--line);
-  margin: 3px 0 3px 4px;
-}
-
-.redirect-chain-step strong {
-  color: var(--ink);
-}
 </style>
 
 <script>
-const PROXY_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-  ? 'http://localhost:54321/functions/v1/redirect-checker'
-  : 'https://0ec90b57d6e95fcbda19832f.supabase.co/functions/v1/redirect-checker';
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
 
-const PROXY_HEADERS = {
-  'Content-Type': 'application/json',
-  'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJib2x0IiwicmVmIjoiMGVjOTBiNTdkNmU5NWZjYmRhMTk4MzJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg4ODE1NzQsImV4cCI6MTc1ODg4MTU3NH0.9I8-U0x86Ak8t2DGaIk0HfvTSLsAyzdnz-Nw00mMkKw'
-};
+function normalizeUrl(u) {
+  try {
+    const x = new URL(u);
+    return (x.protocol + '//' + x.hostname).toLowerCase() + x.pathname.replace(/\/+$/, '');
+  } catch (e) { return u; }
+}
+
+async function checkUrl(url) {
+  const proxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
+  const r = await fetch(proxy);
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  const data = await r.json();
+  const finalUrl = (data.status && data.status.url) || url;
+  const status = (data.status && data.status.http_code) || 0;
+  return { finalUrl: finalUrl, status: status, redirected: normalizeUrl(finalUrl) !== normalizeUrl(url) };
+}
 
 document.getElementById('check').addEventListener('click', async function(){
   const input = document.getElementById('input').value.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
@@ -125,11 +129,6 @@ document.getElementById('check').addEventListener('click', async function(){
 
   if (input.length === 0) {
     outputArea.value = 'Please enter at least one URL.';
-    return;
-  }
-
-  if (input.length > 25) {
-    outputArea.value = 'Please limit to 25 URLs per check.';
     return;
   }
 
@@ -144,76 +143,48 @@ document.getElementById('check').addEventListener('click', async function(){
   let errorCount = 0;
   const results = [];
 
-  try {
-    const response = await fetch(PROXY_URL, {
-      method: 'POST',
-      headers: PROXY_HEADERS,
-      body: JSON.stringify({ urls: input })
-    });
-
-    if (!response.ok) {
-      const errText = await response.text().catch(() => response.statusText);
-      throw new Error('Proxy returned ' + response.status + ': ' + errText);
+  for (const url of input) {
+    try {
+      new URL(url);
+    } catch (e) {
+      checkedCount++; errorCount++;
+      const div = document.createElement('div');
+      div.className = 'redirect-result status-error';
+      div.innerHTML = '<div class="redirect-result-url"><strong>URL:</strong> ' + escapeHtml(url) + '</div><div class="redirect-result-status">\u274C Invalid URL</div>';
+      resultsDiv.appendChild(div);
+      results.push(url + ' \u2192 ERROR: Invalid URL');
+      continue;
     }
 
-    const data = await response.json();
-    const items = data.results || [];
-
-    for (const item of items) {
+    try {
+      const info = await checkUrl(url);
       checkedCount++;
 
-      if (item.error) {
-        errorCount++;
-        const resultDiv = document.createElement('div');
-        resultDiv.className = 'redirect-result status-error';
-        resultDiv.innerHTML = '<div class="redirect-result-url"><strong>URL:</strong> ' + escapeHtml(item.url) + '</div><div class="redirect-result-status">\u274C Error: ' + escapeHtml(item.error) + '</div>';
-        resultsDiv.appendChild(resultDiv);
-        results.push(item.url + ' \u2192 ERROR: ' + item.error);
-        continue;
-      }
-
-      const statusCode = item.finalStatus;
-      const isRedirect = item.redirected;
-
-      if (isRedirect) {
+      if (info.redirected) {
         redirectCount++;
-        const resultDiv = document.createElement('div');
-        const lastHop = item.chain[item.chain.length - 1];
-        const statusClass = 'status-' + (lastHop ? lastHop.status : 'error');
-        resultDiv.className = 'redirect-result ' + statusClass;
-
-        let html = '<div class="redirect-result-url"><strong>URL:</strong> ' + escapeHtml(item.url) + '</div>';
-        html += '<div class="redirect-result-status">\u2197 ' + item.chain.length + ' hop' + (item.chain.length === 1 ? '' : 's') + ' \u2192 ' + statusCode + '</div>';
-        html += '<div class="redirect-result-chain"><strong>Final URL:</strong> ' + escapeHtml(item.finalUrl) + '</div>';
-
-        if (item.chain.length > 1) {
-          html += '<div class="redirect-result-chain" style="margin-top:6px;"><strong>Chain:</strong></div>';
-          item.chain.forEach(function(step, idx) {
-            html += '<div class="redirect-chain-step"><strong>' + (idx + 1) + '.</strong> ' + step.status + ' \u2192 ' + escapeHtml(step.url) + (step.location ? '<br>&nbsp;&nbsp;&nbsp;\u2192 ' + escapeHtml(step.location) : '') + '</div>';
-          });
-        }
-
-        resultDiv.innerHTML = html;
-        resultsDiv.appendChild(resultDiv);
-        results.push(item.url + ' \u2192 ' + item.chain.map(function(s){ return s.status; }).join(' \u2192 ') + ' \u2192 ' + item.finalUrl);
+        const div = document.createElement('div');
+        div.className = 'redirect-result status-301';
+        div.innerHTML = '<div class="redirect-result-url"><strong>URL:</strong> ' + escapeHtml(url) + '</div><div class="redirect-result-status">\u2197 Redirect detected</div><div class="redirect-result-chain"><strong>Final URL:</strong> ' + escapeHtml(info.finalUrl) + ' <span>(status ' + info.status + ')</span></div>';
+        resultsDiv.appendChild(div);
+        results.push(url + ' \u2192 ' + info.status + ' \u2192 ' + info.finalUrl);
       } else {
-        const resultDiv = document.createElement('div');
-        const statusClass = statusCode < 400 ? 'status-200' : 'status-error';
-        resultDiv.className = 'redirect-result ' + statusClass;
-        const statusIcon = statusCode < 400 ? '\u2713' : '\u2717';
-        resultDiv.innerHTML = '<div class="redirect-result-url"><strong>URL:</strong> ' + escapeHtml(item.url) + '</div><div class="redirect-result-status">' + statusIcon + ' ' + statusCode + ' No redirect</div>';
-        resultsDiv.appendChild(resultDiv);
-        results.push(item.url + ' \u2192 ' + statusCode + ' (No redirect)');
+        const cls = (info.status && info.status < 400) ? 'status-200' : 'status-error';
+        const icon = (info.status && info.status < 400) ? '\u2713' : '\u2717';
+        const div = document.createElement('div');
+        div.className = 'redirect-result ' + cls;
+        div.innerHTML = '<div class="redirect-result-url"><strong>URL:</strong> ' + escapeHtml(url) + '</div><div class="redirect-result-status">' + icon + ' ' + info.status + ' No redirect</div>';
+        resultsDiv.appendChild(div);
+        results.push(url + ' \u2192 ' + info.status + ' (No redirect)');
       }
+    } catch (error) {
+      checkedCount++; errorCount++;
+      const div = document.createElement('div');
+      div.className = 'redirect-result status-error';
+      const msg = error.message || 'Unknown error';
+      div.innerHTML = '<div class="redirect-result-url"><strong>URL:</strong> ' + escapeHtml(url) + '</div><div class="redirect-result-status">\u274C Error: ' + escapeHtml(msg) + '</div><div class="redirect-result-chain">The URL could not be checked (proxy or network failure).</div>';
+      resultsDiv.appendChild(div);
+      results.push(url + ' \u2192 ERROR: ' + msg);
     }
-  } catch (error) {
-    errorCount++;
-    const resultDiv = document.createElement('div');
-    resultDiv.className = 'redirect-result status-error';
-    const errorMsg = error.message || 'Unknown error';
-    resultDiv.innerHTML = '<div class="redirect-result-status">\u274C Request failed: ' + escapeHtml(errorMsg) + '</div><div class="redirect-result-chain">The redirect checker proxy could not be reached. Please try again.</div>';
-    resultsDiv.appendChild(resultDiv);
-    results.push('Proxy error: ' + errorMsg);
   }
 
   resultsDiv.style.display = 'block';
@@ -244,12 +215,6 @@ document.getElementById('copy').addEventListener('click', function(){
   const btn = this;
   const orig = btn.textContent;
   btn.textContent = 'Copied!';
-  setTimeout(() => { btn.textContent = orig; }, 2000);
+  setTimeout(function(){ btn.textContent = orig; }, 2000);
 });
-
-function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
-}
 </script>
