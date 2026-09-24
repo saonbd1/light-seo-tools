@@ -17,8 +17,8 @@ description: Check which URLs in a list are still reachable.
     </div>
     <div class="tool-panel">
       <h2 class="section-title">Results</h2>
-      <p class="section-desc">Alive vs. unreachable.</p>
-      <div class="result-meta" id="meta" style="display:none;"><span class="meta-item"><strong id="total">0</strong> checked</span><span class="meta-item"><strong id="alive">0</strong> alive</span><span class="meta-item"><strong id="dead">0</strong> unreachable</span></div>
+      <p class="section-desc">Alive vs. dead.</p>
+      <div class="result-meta" id="meta" style="display:none;"><span class="meta-item"><strong id="total">0</strong> checked</span><span class="meta-item"><strong id="alive">0</strong> alive</span><span class="meta-item"><strong id="dead">0</strong> dead</span></div>
       <div id="results" style="display:none;max-height:360px;overflow-y:auto;margin-bottom:12px;"></div>
       <textarea id="output" class="tool-input" rows="10" readonly placeholder="Copyable list will appear here"></textarea>
       <div class="tool-actions"><button id="copy" class="btn-secondary" style="display:none;">Copy</button></div>
@@ -36,13 +36,16 @@ description: Check which URLs in a list are still reachable.
 
 <script>
 function escapeHtml(text) { const d = document.createElement('div'); d.textContent = text; return d.innerHTML; }
-async function isAlive(url) {
-  try { const r = await fetch(url, { redirect: 'follow' }); if (r.ok) return true; } catch (e) {}
+async function checkAlive(url) {
   try {
-    const proxy = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url);
-    const r = await fetch(proxy);
-    return r.ok;
-  } catch (e) { return false; }
+    const r = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(url));
+    if (!r.ok) return { alive: false, code: r.status };
+    const data = await r.json();
+    const code = (data.status && data.status.http_code) || 0;
+    return { alive: code >= 200 && code < 400, code: code };
+  } catch (e) {
+    return { alive: false, code: 0 };
+  }
 }
 document.getElementById('run').addEventListener('click', async function () {
   const urls = document.getElementById('input').value.split(/\r?\n/).map(function (s) { return s.trim(); }).filter(Boolean);
@@ -58,23 +61,23 @@ document.getElementById('run').addEventListener('click', async function () {
   let alive = 0;
   const rows = [];
   for (const url of urls) {
-    const ok = await isAlive(url);
-    if (ok) alive++;
-    rows.push({ url: url, ok: ok });
-    const badge = ok ? '<span class="badge alive">alive</span>' : '<span class="badge dead">dead</span>';
+    const res = await checkAlive(url);
+    if (res.alive) alive++;
+    rows.push({ url: url, ok: res.alive, code: res.code });
+    const badge = res.alive ? '<span class="badge alive">alive</span>' : '<span class="badge dead">dead</span>';
     const item = document.createElement('div');
     item.className = 'link-result';
-    item.innerHTML = '<div class="u">' + badge + ' ' + escapeHtml(url) + '</div>';
+    item.innerHTML = '<div class="u">' + badge + ' <strong>' + res.code + '</strong> ' + escapeHtml(url) + '</div>';
     resultsDiv.appendChild(item);
     resultsDiv.style.display = 'block';
   }
-  document.getElementById('output').value = rows.map(function (r) { return (r.ok ? 'alive' : 'dead') + '\t' + r.url; }).join('\n');
+  document.getElementById('output').value = rows.map(function (r) { return (r.ok ? 'alive' : 'dead') + '\t' + r.code + '\t' + r.url; }).join('\n');
   document.getElementById('total').textContent = rows.length;
   document.getElementById('alive').textContent = alive;
   document.getElementById('dead').textContent = rows.length - alive;
   document.getElementById('meta').style.display = 'flex';
   document.getElementById('copy').style.display = rows.length ? 'block' : 'none';
-  status.textContent = 'Done: ' + alive + ' alive, ' + (rows.length - alive) + ' unreachable.';
+  status.textContent = 'Done: ' + alive + ' alive, ' + (rows.length - alive) + ' dead.';
   btn.disabled = false;
 });
 document.getElementById('clear').addEventListener('click', function () { document.getElementById('input').value = ''; document.getElementById('output').value = ''; document.getElementById('results').innerHTML = ''; document.getElementById('results').style.display = 'none'; document.getElementById('meta').style.display = 'none'; document.getElementById('copy').style.display = 'none'; document.getElementById('status').style.display = 'none'; });
