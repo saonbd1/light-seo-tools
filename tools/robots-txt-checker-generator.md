@@ -75,7 +75,12 @@ description: Inspect any site's robots.txt and generate your own crawler directi
         <input id="gen-agent" class="tool-input" value="*" placeholder="*" />
 
         <label class="field-label" for="gen-disallow">Disallow (one path per line)</label>
-        <textarea id="gen-disallow" class="tool-input" rows="4" placeholder="/private/&#10;/admin/"></textarea>
+        <div class="tool-actions" style="margin-top:0;margin-bottom:10px;">
+          <button id="preset-seo" class="btn-secondary" type="button">SEO defaults</button>
+          <button id="preset-ecom" class="btn-secondary" type="button">E-commerce</button>
+          <button id="preset-none" class="btn-secondary" type="button">Clear</button>
+        </div>
+        <textarea id="gen-disallow" class="tool-input" rows="6" placeholder="/private/&#10;/admin/"></textarea>
 
         <label class="field-label" for="gen-allow">Allow (one path per line)</label>
         <textarea id="gen-allow" class="tool-input" rows="3" placeholder="/private/public/"></textarea>
@@ -319,6 +324,20 @@ document.getElementById('check-copy').addEventListener('click', function () {
 });
 
 // ---------- Generator ----------
+const SEO_DISALLOW = ['/tag/', '/category/', '/author/', '/page/', '/search', '/*?s=', '/feed/', '/comments/', '/trackback/', '/wp-admin/', '/wp-includes/', '/wp-json/', '/xmlrpc.php', '/cgi-bin/'];
+const ECOM_DISALLOW = ['/cart/', '/checkout/', '/my-account/', '/wishlist/', '/order-received/', '/addons/', '/*?add-to-cart=', '/*?wc-ajax='];
+
+document.getElementById('preset-seo').addEventListener('click', function () {
+  document.getElementById('gen-disallow').value = SEO_DISALLOW.join('\n');
+});
+document.getElementById('preset-ecom').addEventListener('click', function () {
+  document.getElementById('gen-disallow').value = ECOM_DISALLOW.join('\n');
+});
+document.getElementById('preset-none').addEventListener('click', function () {
+  document.getElementById('gen-disallow').value = '';
+});
+document.getElementById('gen-disallow').value = SEO_DISALLOW.join('\n');
+
 function generateRobotsText() {
   const agent = document.getElementById('gen-agent').value.trim() || '*';
   const disallow = document.getElementById('gen-disallow').value.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
