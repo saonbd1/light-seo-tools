@@ -34,6 +34,7 @@ description: Browser helpers and Scrapebox-backed SEO report workflows.
 <article class="card tool-card"><span class="pill">Free helper · 23</span><h3>Split Text File</h3><p>Break a large list into smaller parts.</p><a class="button secondary" href="{{ site.baseurl }}/tools/split-text-file.html">Open tool</a></article>
 <article class="card tool-card"><span class="pill">Free helper · 24</span><h3>Sort Text Files</h3><p>Sort lines alphabetically or numerically.</p><a class="button secondary" href="{{ site.baseurl }}/tools/sort-text-files.html">Open tool</a></article>
 <article class="card tool-card"><span class="pill">Free helper · 25</span><h3>Extract URL Links</h3><p>Pull all URLs from text or HTML.</p><a class="button secondary" href="{{ site.baseurl }}/tools/extract-url-links.html">Open tool</a></article>
+<article class="card tool-card"><span class="pill">Free helper · 26</span><h3>Legal Page Generator</h3><p>Generate Terms, Privacy Policy, and Affiliate Disclosure text for your site.</p><a class="button secondary" href="{{ site.baseurl }}/tools/legal-page-generator.html">Open tool</a></article>
 </div>
 
 <div class="section-heading" style="margin-top:60px"><div><span class="eyebrow">Scrapebox workflows</span><h2>Request a processed report</h2></div><p>Larger lists and API-driven lookups are processed offline and delivered by private link.</p></div>

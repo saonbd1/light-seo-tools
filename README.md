@@ -29,6 +29,7 @@ A lightweight, static SEO toolkit: quick browser-side helpers plus Scrapebox-bac
 - Split Text File - Break a list into smaller parts
 - Sort Text Files - Sort lines alphabetically or numerically
 - Extract URL Links - Pull all URLs from text or HTML
+- Legal Page Generator - Generate Terms, Privacy Policy, and Affiliate Disclosure text
 
 ## Scrapebox-Backed Workflows
 
