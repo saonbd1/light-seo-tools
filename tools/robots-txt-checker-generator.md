@@ -1,7 +1,36 @@
 ---
 layout: default
 title: Robots.txt Checker & Generator
-description: Inspect any site's robots.txt and generate your own crawler directives in seconds.
+seo_title: "Robots.txt Checker & Generator — Free SEO Tool | Light SEO Tools"
+description: "Inspect any site's robots.txt for free and generate your own crawler directives. See user-agents, allow and disallow rules and sitemap references at a glance."
+tool: true
+guide:
+  eyebrow: Free browser helper
+  heading: Robots.txt Checker &amp; Generator
+  what: "Two tools on one page: fetch and analyse an existing robots.txt to see exactly what crawlers are told, then build a clean file of your own and copy it straight into your site root."
+  steps:
+    - "In the checker, enter a domain or full URL and click Check robots.txt."
+    - "Review the parsed summary: user-agents, disallow rules, allow rules, sitemap references and missing-file warnings."
+    - "Switch to the generator and add your user-agent rules plus your sitemap location."
+    - "Copy or download the result and upload it as /robots.txt in your site root."
+  tips:
+    - "A missing robots.txt is not an error — with no file everything is crawlable — but publishing one lets you point crawlers at your sitemap."
+    - "Never rely on robots.txt to hide private pages. Use authentication or a noindex directive instead, because anyone can read a robots.txt file."
+    - "Test after every edit: a single stray Disallow: / line can pull an entire site out of the index."
+faq:
+  - q: "Does robots.txt remove pages from search results?"
+    a: "No. Disallow stops crawling, not indexing. If other pages link to the URL it can still appear in results. Use a noindex directive on the page itself to remove it."
+  - q: "Where does robots.txt have to live?"
+    a: "Always in the root of the domain, for example https://example.com/robots.txt. Rules apply per host, so www and non-www are treated separately."
+  - q: "Can I check robots.txt at scale?"
+    a: "This checker is built for spot checks. To audit robots.txt and crawl rules across hundreds of domains, request a Scrapebox-backed report."
+related:
+  - title: Sitemap Scraper
+    url: /tools/sitemap-scraper.html
+  - title: Meta Tag Generator
+    url: /tools/meta-tag-generator.html
+  - title: Link Extractor
+    url: /tools/link-extractor.html
 ---
 
 <div class="page-hero">
@@ -397,3 +426,5 @@ document.getElementById('gen-download').addEventListener('click', function () {
   URL.revokeObjectURL(a.href);
 });
 </script>
+
+{% include tool-guide.html %}

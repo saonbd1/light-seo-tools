@@ -1,7 +1,36 @@
 ---
 layout: default
 title: Legal Page Generator
-description: Generate Terms of Service, Privacy Policy, and Affiliate Disclosure text for your site.
+seo_title: "Legal Page Generator — Free Terms & Privacy Templates"
+description: "Generate Terms of Service, Privacy Policy and Affiliate Disclosure text for free. Fill in your site details and copy or download ready-to-adapt legal pages."
+tool: true
+guide:
+  eyebrow: Free browser helper
+  heading: Legal Page Generator
+  what: "Fill in your site name, owner, URL, contact email and jurisdiction and the generator drafts three documents — Terms of Service, Privacy Policy and Affiliate Disclosure — that you can adapt and publish."
+  steps:
+    - "Complete the site details form. Blank fields fall back to sensible defaults."
+    - "Click Generate."
+    - "Switch between the Terms, Privacy Policy and Disclosure tabs to review each document."
+    - "Copy or download the text, then adapt it to how your site actually collects and uses data."
+  tips:
+    - "Describe your real practices: analytics, cookies, payment and email providers, and how long you keep data."
+    - "Update the effective date whenever you make a material change, and tell users what changed."
+    - "Treat this as a starting template, not legal advice, and have a qualified lawyer review anything high-risk or regulated."
+faq:
+  - q: "Are these documents ready to publish as-is?"
+    a: "They are a structured starting point, not legal advice. Review them against your actual practices and local requirements, and get professional advice where the risk is material."
+  - q: "Why does a site need these pages?"
+    a: "A privacy policy is legally required in many jurisdictions and is expected by ad networks and analytics providers. Terms and a disclosure set user expectations and build trust."
+  - q: "Does the generator store my details?"
+    a: "No. Everything is generated in your browser and nothing is sent to a server."
+related:
+  - title: Meta Tag Generator
+    url: /tools/meta-tag-generator.html
+  - title: Bing Meta Scraper
+    url: /tools/bing-meta-scraper.html
+  - title: Robots.txt Checker & Generator
+    url: /tools/robots-txt-checker-generator.html
 ---
 
 <div class="page-hero"><div class="shell"><span class="eyebrow">Free browser helper</span><h1>Legal Page Generator</h1><p class="hero-description">Generate ready-to-use Terms of Service, Privacy Policy, and Affiliate Disclosure text from your site details.</p></div></div>
@@ -244,3 +273,5 @@ document.getElementById('download').addEventListener('click', function () {
 
 document.getElementById('f-date').value = new Date().toISOString().split('T')[0];
 </script>
+
+{% include tool-guide.html %}

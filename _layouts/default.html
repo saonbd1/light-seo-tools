@@ -1,11 +1,126 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{ page.description | default: site.description }}">
-    <title>{{ page.title | default: site.title }} | {{ site.title }}</title>
+    {%- assign seo_title = page.title | default: site.title -%}
+    {%- assign seo_description = page.description | default: site.description | strip_newlines | strip -%}
+    {%- assign canonical_url = page.url | absolute_url -%}
+    <title>{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ seo_title }} | {{ site.title }}{% endif %}</title>
+    <meta name="description" content="{{ seo_description | escape }}">
+    <meta name="robots" content="{% if page.noindex %}noindex, nofollow{% else %}index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1{% endif %}">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <meta name="author" content="{{ site.title }}">
+    <meta name="theme-color" content="#275fe8">
+    <meta name="format-detection" content="telephone=no">
+    <!-- Consumed by assets/auth.js so the sign-in page works at any baseurl. -->
+    <meta name="site-baseurl" content="{{ site.baseurl }}">
+    <meta name="supabase-url" content="{{ site.supabase_url }}">
+    <meta name="supabase-anon-key" content="{{ site.supabase_anon_key }}">
+    <!-- Social sharing -->
+    <meta property="og:site_name" content="{{ site.title | escape }}">
+    <meta property="og:type" content="{{ page.og_type | default: 'website' }}">
+    <meta property="og:title" content="{{ page.seo_title | default: seo_title | escape }}">
+    <meta property="og:description" content="{{ seo_description | escape }}">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:locale" content="en_US">
+    {%- if page.image %}
+    <meta property="og:image" content="{{ page.image | absolute_url }}">
+    {%- endif %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ page.seo_title | default: seo_title | escape }}">
+    <meta name="twitter:description" content="{{ seo_description | escape }}">
+    <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}">
     <link rel="stylesheet" href="{{ site.baseurl }}/assets/site.css">
+
+    {%- comment -%} Structured data (schema.org). Organization is site-wide; the rest is per page type. {%- endcomment -%}
+    {% unless page.noindex %}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": {{ site.title | jsonify }},
+        "url": {{ "/" | absolute_url | jsonify }},
+        "description": {{ site.description | strip_newlines | strip | jsonify }}
+      }
+    </script>
+    {%- if page.url == "/" %}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": {{ site.title | jsonify }},
+        "alternateName": {{ site.tagline | default: site.title | jsonify }},
+        "url": {{ "/" | absolute_url | jsonify }},
+        "description": {{ site.description | strip_newlines | strip | jsonify }},
+        "inLanguage": {{ site.lang | default: "en" | jsonify }},
+        "publisher": { "@type": "Organization", "name": {{ site.title | jsonify }}, "url": {{ "/" | absolute_url | jsonify }} }
+      }
+    </script>
+    {%- else %}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": {{ seo_title | jsonify }},
+        "description": {{ seo_description | jsonify }},
+        "url": {{ canonical_url | jsonify }},
+        "inLanguage": {{ site.lang | default: "en" | jsonify }},
+        "isPartOf": { "@type": "WebSite", "name": {{ site.title | jsonify }}, "url": {{ "/" | absolute_url | jsonify }} },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": {{ "/" | absolute_url | jsonify }}}{% if page.url contains "/tools/" %},
+            { "@type": "ListItem", "position": 2, "name": "Free SEO tools", "item": {{ "/tools/tools-overview.html" | absolute_url | jsonify }}},
+            { "@type": "ListItem", "position": 3, "name": {{ seo_title | jsonify }}, "item": {{ canonical_url | jsonify }}}{% else %},
+            { "@type": "ListItem", "position": 2, "name": {{ seo_title | jsonify }}, "item": {{ canonical_url | jsonify }}}{% endif %}
+          ]
+        }
+      }
+    </script>
+    {%- endif %}
+    {% endunless %}
+
+    {%- if page.tool %}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": {{ seo_title | jsonify }},
+        "url": {{ canonical_url | jsonify }},
+        "description": {{ seo_description | jsonify }},
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any device with a modern web browser",
+        "browserRequirements": "Requires JavaScript",
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "publisher": { "@type": "Organization", "name": {{ site.title | jsonify }}, "url": {{ "/" | absolute_url | jsonify }} }
+      }
+    </script>
+    {%- endif %}
+
+    {%- if page.guide.steps %}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": {{ page.guide.heading | default: seo_title | jsonify }},
+        "description": {{ seo_description | jsonify }},
+        "totalTime": "PT2M",
+        "step": [{% for step in page.guide.steps %}{ "@type": "HowToStep", "position": {{ forloop.index }}, "name": {{ step | jsonify }}, "text": {{ step | jsonify }} }{% unless forloop.last %},{% endunless %}{% endfor %}]
+      }
+    </script>
+    {%- endif %}
+
+    {%- if page.faq %}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [{% for item in page.faq %}{ "@type": "Question", "name": {{ item.q | jsonify }}, "acceptedAnswer": { "@type": "Answer", "text": {{ item.a | jsonify }} } }{% unless forloop.last %},{% endunless %}{% endfor %}]
+      }
+    </script>
+    {%- endif %}
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -13,16 +128,17 @@
       <div class="shell nav-wrap">
         <a class="brand" href="{{ site.baseurl }}/"><span class="brand-mark">L</span><span>Light SEO Tools</span></a>
         <nav class="site-nav" aria-label="Main navigation">
-          <a href="{{ site.baseurl }}/">Home</a><a href="{{ site.baseurl }}/tools/tools-overview.html">Tools</a><a href="{{ site.baseurl }}/request.html">Request a report</a><a href="{{ site.baseurl }}/contact.html">Contact</a>
+          <a href="{{ site.baseurl }}/tools/tools-overview.html">Free SEO tools</a><a href="{{ site.baseurl }}/request.html">Bulk reports</a><a id="nav-auth" href="{{ site.baseurl }}/login.html">Sign in</a><a href="{{ site.baseurl }}/contact.html">Contact</a>
         </nav>
       </div>
     </header>
     <main id="main-content">{{ content }}</main>
     <footer class="site-footer">
       <div class="shell footer-grid">
-        <div><a class="brand footer-brand" href="{{ site.baseurl }}/"><span class="brand-mark">L</span><span>Light SEO Tools</span></a><p>Practical SEO data, processed clearly.</p></div>
-        <div><strong>Explore</strong><a href="{{ site.baseurl }}/tools/tools-overview.html">All tools</a><a href="{{ site.baseurl }}/request.html">Request a report</a></div>
-        <div><strong>Support</strong><a href="{{ site.baseurl }}/contact.html">Contact</a><a href="{{ site.baseurl }}/admin.html">Admin</a></div>
+        <div><a class="brand footer-brand" href="{{ site.baseurl }}/"><span class="brand-mark">L</span><span>Light SEO Tools</span></a><p>Free browser SEO tools plus Scrapebox-powered reports for large URL lists.</p></div>
+        <div><strong>Explore</strong><a href="{{ site.baseurl }}/tools/tools-overview.html">All free SEO tools</a><a href="{{ site.baseurl }}/request.html">Request a report</a><a href="{{ site.baseurl }}/contact.html">Contact</a></div>
+        <div><strong>Popular tools</strong><a href="{{ site.baseurl }}/tools/duplicate-url-finder.html">Duplicate URL Finder</a><a href="{{ site.baseurl }}/tools/meta-tag-generator.html">Meta Tag Generator</a><a href="{{ site.baseurl }}/tools/redirect-checker.html">Redirect Checker</a><a href="{{ site.baseurl }}/tools/sitemap-scraper.html">Sitemap Scraper</a></div>
+        <div><strong>Bulk workflows</strong><a href="{{ site.baseurl }}/tools/meta-tag-scraper.html">Meta Tag Scraper</a><a href="{{ site.baseurl }}/tools/google-index-checker.html">Google Index Checker</a><a href="{{ site.baseurl }}/request.html">Report types</a></div>
         <div><strong>Legal</strong><a href="{{ site.baseurl }}/legal.html">Legal</a><a href="{{ site.baseurl }}/terms.html">Terms of Service</a><a href="{{ site.baseurl }}/privacy-policy.html">Privacy Policy</a><a href="{{ site.baseurl }}/disclosure.html">Disclosure</a></div>
       </div>
       <div class="shell footer-bottom"><span>&copy; {{ site.time | date: "%Y" }} Light SEO Tools</span><span>Powered by Scrapebox workflows</span></div>

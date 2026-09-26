@@ -1,7 +1,36 @@
 ---
 layout: default
 title: Outbound Link Checker
-description: Find external (outbound) links in pasted HTML.
+seo_title: "Outbound Link Checker — Find External Links Free | Light SEO Tools"
+description: "Find every outbound link on a page for free. Compare links against a base domain to separate internal from external links, then copy the list in one click."
+tool: true
+guide:
+  eyebrow: Free browser helper
+  heading: Outbound Link Checker
+  what: "Give the checker a base domain and a page's HTML and it splits every link into internal and external, so you can review who you link out to without installing a desktop crawler."
+  steps:
+    - "Paste the base domain of the page you are analysing."
+    - "Paste the page HTML, or enter a URL and click Fetch Source."
+    - "Click Check Links."
+    - "Review the external links first, then the internal list, and copy either group for your audit."
+  tips:
+    - "Outbound links to relevant, authoritative sources give readers context — but a wall of low-quality links dilutes a page's focus."
+    - "Check how external links open and whether paid or user-generated links carry the correct rel attributes."
+    - "Re-run the audit after a content refresh; outbound links rot faster than internal ones."
+faq:
+  - q: "What counts as an outbound link?"
+    a: "Any link whose hostname differs from the base domain you entered, including links to subdomains that do not exactly match the base host."
+  - q: "How many outbound links should a page have?"
+    a: "There is no fixed number. Prioritise relevance and reader value, and remove links that no longer support the content."
+  - q: "Does the checker follow the outbound links?"
+    a: "No. It only reads the HTML you supply. Use the Alive URL Checker to confirm that external destinations still respond."
+related:
+  - title: Anchor Text Checker
+    url: /tools/anchor-text-checker.html
+  - title: Dofollow Link Tester
+    url: /tools/dofollow-link-tester.html
+  - title: Alive URL Checker
+    url: /tools/alive-url-checker.html
 ---
 
 <div class="page-hero"><div class="shell"><span class="eyebrow">Free browser helper</span><h1>Outbound Link Checker</h1><p class="hero-description">Separate internal and external links by comparing against a base domain.</p></div></div>
@@ -111,3 +140,5 @@ document.getElementById('clear').addEventListener('click', function () {
   const s = document.getElementById('status'); s.textContent = ''; s.style.display = 'none';
 });
 </script>
+
+{% include tool-guide.html %}

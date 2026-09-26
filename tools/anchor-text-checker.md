@@ -1,7 +1,36 @@
 ---
 layout: default
 title: Anchor Text Checker
-description: Extract anchor text and href values from pasted HTML.
+seo_title: "Anchor Text Checker — Free Internal Link Audit Tool | Light SEO Tools"
+description: "Audit anchor text for free. Paste page HTML or fetch a URL and see every link with its anchor text, target URL and empty-anchor warnings."
+tool: true
+guide:
+  eyebrow: Free browser helper
+  heading: Anchor Text Checker
+  what: "Parse a page's HTML and list every link with the exact anchor text a reader would click, plus a count of links with no text at all — the fastest way to catch image-only and empty anchors."
+  steps:
+    - "Paste the page source, or enter a URL and click Fetch Source to load it for you."
+    - "Click Check Anchors to parse every link in the HTML."
+    - "Review the anchor text, target URLs and the empty-text counter."
+    - "Copy the plain-text result into a spreadsheet for a wider link audit."
+  tips:
+    - "Descriptive anchor text helps people and search engines understand the destination. Replace 'click here' and bare URLs with the topic of the target page."
+    - "Empty anchors usually mean the link wraps an image. Add an alt attribute or visible text so the link keeps its meaning."
+    - "Re-run the check after template changes — navigation and footer links are where generic anchor text creeps back in."
+faq:
+  - q: "What is anchor text?"
+    a: "It is the visible, clickable words of a link. Search engines use it as a signal about the destination page, so it should describe the target page."
+  - q: "Why are some anchors counted as empty?"
+    a: "The link contained no text — usually an image with no alt text, an icon font, or markup the parser could not read. Those links tell search engines nothing."
+  - q: "Can I audit anchors across a whole site?"
+    a: "Yes. Send a URL list as a report request to get anchor text, rel attributes and target URLs for every page in one export."
+related:
+  - title: Dofollow Link Tester
+    url: /tools/dofollow-link-tester.html
+  - title: Outbound Link Checker
+    url: /tools/outbound-link-checker.html
+  - title: Bulk Anchor Text Creator
+    url: /tools/bulk-anchor-text-creator.html
 ---
 
 <div class="page-hero"><div class="shell"><span class="eyebrow">Free browser helper</span><h1>Anchor Text Checker</h1><p class="hero-description">Parse a page's HTML and list every link with its anchor text and target URL.</p></div></div>
@@ -101,3 +130,5 @@ document.getElementById('clear').addEventListener('click', function () {
   const s = document.getElementById('status'); s.textContent = ''; s.style.display = 'none';
 });
 </script>
+
+{% include tool-guide.html %}

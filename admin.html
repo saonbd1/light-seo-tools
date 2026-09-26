@@ -1,11 +1,18 @@
 ---
 layout: default
 title: Admin Dashboard
+description: Private admin dashboard for reviewing report requests.
+noindex: true
 ---
 
-# Admin Dashboard
+<h1>Admin Dashboard</h1>
 
-This page is intended for administrators to review incoming requests and attach report links.
+<p>This page is intended for administrators to review incoming requests and attach report links.</p>
+
+<p class="auth-message" id="admin-status" role="status" aria-live="polite">Checking your session…</p>
+
+<div id="admin-gate" hidden>
+<div class="admin-toolbar"><span class="auth-session">Signed in as <strong id="admin-email">your account</strong></span><button class="btn-secondary" type="button" id="admin-signout">Sign out</button></div>
 
 {% if site.admin_sheet_url and site.admin_sheet_url != "" %}
 <p>The Google Sheet is embedded below. If it does not display, ensure the sheet is published to the web or shared with a viewable link.</p>
@@ -90,7 +97,7 @@ This page is intended for administrators to review incoming requests and attach 
 <ol>
   <li>Create a new Google Sheet (https://sheets.google.com) and name it "light-seo-tools - Requests".</li>
   <li>Create these columns in row 1: Timestamp, Email, Report Type, Uploaded File (Y/N), Notes, Report Link, Status, Admin Notes</li>
-  <liPopulate it with a test row to make sure it works.</li>
+  <li>Populate it with a test row to make sure it works.</li>
   <li>To embed the sheet here, publish the sheet or create a shareable link:
     <ul>
       <li>Publish to web: File → Publish to the web → select the sheet/tab → Publish → copy the provided link. Use the 'Embed' option to get an iframe URL, or use the normal published link.</li>
@@ -100,5 +107,42 @@ This page is intended for administrators to review incoming requests and attach 
   <li>Paste the published URL (the iframe/published link) into _config.yml under admin_sheet_url and push to GitHub. The admin page will then show the embedded sheet.</li>
 </ol>
 
-<p>Note: Publishing the sheet makes it viewable by anyone with the link. If you need privacy, keep the sheet private and only include a link on this page (not embedded), or create a restricted admin area behind authentication.</p>
+<p>Note: Publishing the sheet makes it viewable by anyone with the link. The login page (login.html) hides this dashboard, but a published sheet URL still opens for anyone who has it, so keep client data out of published sheets or serve it from an authenticated source.</p>
 {% endif %}
+
+</div>
+
+<script src="{{ site.baseurl }}/assets/auth.js"></script>
+<script>
+(function () {
+  var status = document.getElementById("admin-status");
+  var gate = document.getElementById("admin-gate");
+  var email = document.getElementById("admin-email");
+  var signOutButton = document.getElementById("admin-signout");
+  var loginHref = LSTAuth.loginUrl("/admin.html");
+
+  if (!LSTAuth.isConfigured()) {
+    status.className = "auth-message is-error";
+    status.textContent = "Supabase Auth is not configured yet, so this dashboard stays hidden. Add supabase_url and supabase_anon_key to _config.yml (see INSTRUCTIONS.md, section 8).";
+    return;
+  }
+
+  LSTAuth.bindNav();
+
+  LSTAuth.guard({
+    redirectTo: loginHref,
+    onAuthorized: function (session) {
+      gate.hidden = false;
+      status.hidden = true;
+      if (session.user && session.user.email) email.textContent = session.user.email;
+    }
+  });
+
+  signOutButton.addEventListener("click", function () {
+    signOutButton.disabled = true;
+    LSTAuth.signOut().then(function () {
+      window.location.replace(loginHref);
+    });
+  });
+})();
+</script>

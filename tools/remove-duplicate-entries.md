@@ -1,7 +1,36 @@
 ---
 layout: default
 title: Remove Duplicate Entries
-description: Remove duplicate lines from any text list in your browser.
+seo_title: "Remove Duplicate Entries — Dedupe Any Text List Free"
+description: "Remove duplicate lines from any text list for free. Paste keywords, URLs or names and get a unique list back, with optional case-insensitive matching."
+tool: true
+guide:
+  eyebrow: Free browser helper
+  heading: Remove Duplicate Entries
+  what: "A general-purpose deduplicator: paste any line-based list and the tool keeps the first occurrence of every entry, with an optional case-insensitive mode for lists where Apple and apple should count as one."
+  steps:
+    - "Paste one entry per line into the Input box."
+    - "Tick Case-insensitive if capitalisation should not create a separate entry."
+    - "Click Remove Duplicates."
+    - "Review the submitted, unique and removed counters, then copy the result."
+  tips:
+    - "For URL lists specifically, use the Duplicate URL Finder, which gives the same result with URL-shaped counters."
+    - "Run Sort Text Files first if you want to see which duplicates sat next to each other in the source."
+    - "Case-insensitive mode keeps the first spelling it meets, so put your preferred capitalisation at the top of the list."
+faq:
+  - q: "Does it remove blank lines?"
+    a: "Yes. Empty lines and lines containing only spaces are dropped before deduplication."
+  - q: "What is the difference between case-sensitive and case-insensitive?"
+    a: "Case-sensitive treats Apple and apple as two entries. Case-insensitive treats them as one and keeps the first spelling encountered."
+  - q: "Is there a size limit?"
+    a: "The work happens in your browser, so the practical limit is your device's memory. Very large files are better handled by the offline report workflow."
+related:
+  - title: Duplicate URL Finder
+    url: /tools/duplicate-url-finder.html
+  - title: Sort Text Files
+    url: /tools/sort-text-files.html
+  - title: Merge Duplicate Links
+    url: /tools/merge-duplicate-links.html
 ---
 
 <div class="page-hero"><div class="shell"><span class="eyebrow">Free browser helper</span><h1>Remove Duplicate Entries</h1><p class="hero-description">Clean repeated lines from any list, with an optional case-insensitive mode.</p></div></div>
@@ -45,3 +74,5 @@ document.getElementById('run').addEventListener('click', function () {
 document.getElementById('clear').addEventListener('click', function () { document.getElementById('input').value = ''; document.getElementById('output').value = ''; document.getElementById('meta').style.display = 'none'; document.getElementById('copy').style.display = 'none'; });
 document.getElementById('copy').addEventListener('click', function () { const el = document.getElementById('output'); el.select(); document.execCommand('copy'); const b = this, o = b.textContent; b.textContent = 'Copied!'; setTimeout(function () { b.textContent = o; }, 2000); });
 </script>
+
+{% include tool-guide.html %}
