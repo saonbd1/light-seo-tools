@@ -37,12 +37,20 @@ related:
     url: /tools/meta-tag-scraper.html
 ---
 
+<<<<<<< Updated upstream
 <section class="page-hero"><div class="shell"><span class="eyebrow">Free SEO tool library</span><h1>Free SEO tools for URLs, links, meta tags and index checks.</h1><p class="hero-description">Twenty-six browser tools that run instantly with no signup, plus fourteen bulk workflows processed offline with Scrapebox when a list is too large for a browser tab.</p><div class="trust-strip"><span>Free browser tools</span><span>Plain-text input</span><span>No signup required</span></div></div></section>
+=======
+<section class="page-hero"><div class="shell"><span class="eyebrow">Free SEO tool library</span><h1>Free SEO tools for URLs, links, meta tags and index checks.</h1><p class="hero-description">Twenty-seven browser tools that run instantly with no signup, plus fourteen bulk workflows processed offline with Scrapebox when a list is too large for a browser tab.</p><div class="trust-strip"><span>Free browser tools</span><span>Plain-text input</span><span>No signup required</span></div></div></section>
+>>>>>>> Stashed changes
 
 <section class="content"><div class="shell">
 
 <div class="section-heading"><div><span class="eyebrow">Jump to a category</span><h2>Find the tool for your task</h2></div><p>Everything is grouped by what you are trying to do, not by how it was built.</p></div>
+<<<<<<< Updated upstream
 <div class="cards"><article class="card"><h3>Clean and prepare lists</h3><p>Deduplicate, merge, sort, split and trim URL or text lists.</p><a href="#list-tools">9 list tools →</a></article><article class="card"><h3>Analyse a page</h3><p>Meta tags, anchor text, links, images, page weight and article text.</p><a href="#page-tools">8 page tools →</a></article><article class="card"><h3>Crawl and verify</h3><p>Crawl internal links, read sitemaps, follow redirects, test live URLs.</p><a href="#crawl-tools">4 crawl tools →</a></article><article class="card"><h3>Site setup & utilities</h3><p>Robots.txt rules, legal pages, placeholder names, emails and anchors.</p><a href="#utility-tools">5 utility tools →</a></article><article class="card"><h3>Bulk report workflows</h3><p>Offline Scrapebox jobs for index checks, WHOIS, DNS, metadata and more.</p><a href="#report-workflows">14 report workflows →</a></article></div>
+=======
+<div class="cards"><article class="card"><h3>Clean and prepare lists</h3><p>Deduplicate, merge, sort, split and trim URL or text lists.</p><a href="#list-tools">9 list tools →</a></article><article class="card"><h3>Analyse a page</h3><p>Meta tags, anchor text, links, images, OCR, page weight and article text.</p><a href="#page-tools">9 page tools →</a></article><article class="card"><h3>Crawl and verify</h3><p>Crawl internal links, read sitemaps, follow redirects, test live URLs.</p><a href="#crawl-tools">4 crawl tools →</a></article><article class="card"><h3>Site setup & utilities</h3><p>Robots.txt rules, legal pages, placeholder names, emails and anchors.</p><a href="#utility-tools">5 utility tools →</a></article><article class="card"><h3>Bulk report workflows</h3><p>Offline Scrapebox jobs for index checks, WHOIS, DNS, metadata and more.</p><a href="#report-workflows">14 report workflows →</a></article></div>
+>>>>>>> Stashed changes
 
 <div class="section-heading" id="list-tools" style="margin-top:70px"><div><span class="eyebrow">Free browser tools</span><h2>Clean and prepare lists</h2></div><p>Fix your input first: it makes every later step faster and cheaper.</p></div>
 <div class="tool-grid">
@@ -67,23 +75,42 @@ related:
 <article class="card tool-card"><span class="pill">Free · 15</span><h3>Article Scraper</h3><p>Pull readable text out of a page and get a word count.</p><a class="button secondary" href="{{ site.baseurl }}/tools/article-scraper.html">Open tool</a></article>
 <article class="card tool-card"><span class="pill">Free · 16</span><h3>Bing Image Grabber</h3><p>Collect image URLs, including lazy-load attributes.</p><a class="button secondary" href="{{ site.baseurl }}/tools/bing-image-grabber.html">Open tool</a></article>
 <article class="card tool-card"><span class="pill">Free · 17</span><h3>Bandwidth Meter</h3><p>Measure the response size of a page or asset.</p><a class="button secondary" href="{{ site.baseurl }}/tools/bandwidth-meter.html">Open tool</a></article>
+<<<<<<< Updated upstream
+=======
+<article class="card tool-card"><span class="pill">Free · 18</span><h3>OCR Image to Text</h3><p>Extract text from images, scans and screenshots in your browser.</p><a class="button secondary" href="{{ site.baseurl }}/tools/ocr-image-to-text.html">Open tool</a></article>
+>>>>>>> Stashed changes
 </div>
 
 <div class="section-heading" id="crawl-tools" style="margin-top:70px"><div><span class="eyebrow">Free browser tools</span><h2>Crawl and verify</h2></div><p>Follow links, read sitemaps and confirm what is still live.</p></div>
 <div class="tool-grid">
+<<<<<<< Updated upstream
 <article class="card tool-card"><span class="pill">Free · 18</span><h3>Link Extractor</h3><p>Crawl internal links from a starting URL up to three levels deep.</p><a class="button secondary" href="{{ site.baseurl }}/tools/link-extractor.html">Open tool</a></article>
 <article class="card tool-card"><span class="pill">Free · 19</span><h3>Sitemap Scraper</h3><p>Extract every URL listed in a sitemap.xml, deduplicated.</p><a class="button secondary" href="{{ site.baseurl }}/tools/sitemap-scraper.html">Open tool</a></article>
 <article class="card tool-card"><span class="pill">Free · 20</span><h3>Redirect Checker</h3><p>Check 301, 302, 307 and 308 redirects and see each chain.</p><a class="button secondary" href="{{ site.baseurl }}/tools/redirect-checker.html">Open tool</a></article>
 <article class="card tool-card"><span class="pill">Free · 21</span><h3>Alive URL Checker</h3><p>Test which URLs in a list still respond and which are dead.</p><a class="button secondary" href="{{ site.baseurl }}/tools/alive-url-checker.html">Open tool</a></article>
+=======
+<article class="card tool-card"><span class="pill">Free · 19</span><h3>Link Extractor</h3><p>Crawl internal links from a starting URL up to three levels deep.</p><a class="button secondary" href="{{ site.baseurl }}/tools/link-extractor.html">Open tool</a></article>
+<article class="card tool-card"><span class="pill">Free · 20</span><h3>Sitemap Scraper</h3><p>Extract every URL listed in a sitemap.xml, deduplicated.</p><a class="button secondary" href="{{ site.baseurl }}/tools/sitemap-scraper.html">Open tool</a></article>
+<article class="card tool-card"><span class="pill">Free · 21</span><h3>Redirect Checker</h3><p>Check 301, 302, 307 and 308 redirects and see each chain.</p><a class="button secondary" href="{{ site.baseurl }}/tools/redirect-checker.html">Open tool</a></article>
+<article class="card tool-card"><span class="pill">Free · 22</span><h3>Alive URL Checker</h3><p>Test which URLs in a list still respond and which are dead.</p><a class="button secondary" href="{{ site.baseurl }}/tools/alive-url-checker.html">Open tool</a></article>
+>>>>>>> Stashed changes
 </div>
 
 <div class="section-heading" id="utility-tools" style="margin-top:70px"><div><span class="eyebrow">Free browser tools</span><h2>Site setup and utilities</h2></div><p>Practical helpers for launching and maintaining a site.</p></div>
 <div class="tool-grid">
+<<<<<<< Updated upstream
 <article class="card tool-card"><span class="pill">Free · 22</span><h3>Robots.txt Checker &amp; Generator</h3><p>Inspect any robots.txt and build crawler rules of your own.</p><a class="button secondary" href="{{ site.baseurl }}/tools/robots-txt-checker-generator.html">Open tool</a></article>
 <article class="card tool-card"><span class="pill">Free · 23</span><h3>Legal Page Generator</h3><p>Draft Terms of Service, Privacy Policy and disclosure text.</p><a class="button secondary" href="{{ site.baseurl }}/tools/legal-page-generator.html">Open tool</a></article>
 <article class="card tool-card"><span class="pill">Free · 24</span><h3>Bulk Anchor Text Creator</h3><p>Turn URL and anchor text lists into ready-to-paste HTML links.</p><a class="button secondary" href="{{ site.baseurl }}/tools/bulk-anchor-text-creator.html">Open tool</a></article>
 <article class="card tool-card"><span class="pill">Free · 25</span><h3>Name Generator</h3><p>Generate random names for placeholder data and testing.</p><a class="button secondary" href="{{ site.baseurl }}/tools/name-generator.html">Open tool</a></article>
 <article class="card tool-card"><span class="pill">Free · 26</span><h3>Email Generator</h3><p>Create random email addresses on your own test domain.</p><a class="button secondary" href="{{ site.baseurl }}/tools/email-generator.html">Open tool</a></article>
+=======
+<article class="card tool-card"><span class="pill">Free · 23</span><h3>Robots.txt Checker &amp; Generator</h3><p>Inspect any robots.txt and build crawler rules of your own.</p><a class="button secondary" href="{{ site.baseurl }}/tools/robots-txt-checker-generator.html">Open tool</a></article>
+<article class="card tool-card"><span class="pill">Free · 24</span><h3>Legal Page Generator</h3><p>Draft Terms of Service, Privacy Policy and disclosure text.</p><a class="button secondary" href="{{ site.baseurl }}/tools/legal-page-generator.html">Open tool</a></article>
+<article class="card tool-card"><span class="pill">Free · 25</span><h3>Bulk Anchor Text Creator</h3><p>Turn URL and anchor text lists into ready-to-paste HTML links.</p><a class="button secondary" href="{{ site.baseurl }}/tools/bulk-anchor-text-creator.html">Open tool</a></article>
+<article class="card tool-card"><span class="pill">Free · 26</span><h3>Name Generator</h3><p>Generate random names for placeholder data and testing.</p><a class="button secondary" href="{{ site.baseurl }}/tools/name-generator.html">Open tool</a></article>
+<article class="card tool-card"><span class="pill">Free · 27</span><h3>Email Generator</h3><p>Create random email addresses on your own test domain.</p><a class="button secondary" href="{{ site.baseurl }}/tools/email-generator.html">Open tool</a></article>
+>>>>>>> Stashed changes
 </div>
 
 <div class="section-heading" id="report-workflows" style="margin-top:70px"><div><span class="eyebrow">Offline processing</span><h2>Bulk report workflows</h2></div><p>Scrapebox jobs for long lists, delivered as CSV, XLSX, TXT or HTML.</p></div>

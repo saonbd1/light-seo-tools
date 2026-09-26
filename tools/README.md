@@ -19,6 +19,7 @@ This folder contains individual pages for each tool. The site offers lightweight
 - Sitemap Scraper - Fetch a sitemap.xml and extract its URLs
 - Alive URL Checker - Check which URLs are still reachable
 - Bandwidth Meter - Estimate the download size of a URL
+- OCR Image to Text - Convert image to text using client-side optical character recognition
 - Trim URL to Domain - Strip URLs down to their domain
 - Trim URL to Root - Strip URLs down to their origin
 - Trim URL to First Folder - Keep the origin plus the first path segment
