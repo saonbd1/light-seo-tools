@@ -1,16 +1,40 @@
-title: SEO Tools
+title: Light SEO Tools
+tagline: Free browser SEO tools and bulk SEO reports
 email: you@example.com
-description: >
-  Web-based front end for SEO tools with Scrapebox as the offline processing engine.
+description: >-
+  Free SEO tools that run in your browser: remove duplicate URLs, check redirects,
+  scrape meta tags, extract links, measure page size and check index status. Larger
+  URL lists can be processed as Scrapebox reports and delivered by private link.
+lang: en
 baseurl: "/light-seo-tools"
 url: "https://saonbd1.github.io"
 formspree_endpoint: "https://formspree.io/f/xaqrzqkg" # configured by user on 2026-07-31
 report_storage: "dropbox" # options: dropbox, gdrive, s3, local
 report_storage_instructions: "See INSTRUCTIONS.md for setup and upload steps"
 admin_sheet_url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vRcRMA6OAz8RMwRroBWFF_Ay3Xk-vaiSC4oKihH8MfT0q6gCirTE2nfsVnVRVoekyUhA_8lJIAnJLRq/pubhtml?gid=0&single=true&widget=true&headers=false" # configured by user on 2026-07-31 (published embed URL)
+# Supabase Auth — used by login.html and the admin dashboard guard.
+# The project URL matches supabase/config.toml (project_id).
+supabase_url: "https://nlrvkjtvhajmwwicaygz.supabase.co"
+# Paste the "anon public" API key from Supabase → Project Settings → API.
+# The anon key is public by design; real access control belongs in Row Level Security policies.
+supabase_anon_key: ""
+
 theme: minima
 plugins: []
 
-# Exclude sample reports from Jekyll processing
+# Keep internal documentation, samples and tooling files out of the published site.
+# Anything listed here is not copied to _site, so it cannot be indexed as thin
+# duplicate content and it cannot leak workflow notes to visitors.
 exclude:
-  - "sample-reports/*"
+  - "sample-reports"
+  - "sample-inputs"
+  - "docs"
+  - "supabase"
+  - "INSTRUCTIONS.md"
+  - "README.md"
+  - "tools/README.md"
+  - "Gemfile"
+  - "Gemfile.lock"
+  - "package.json"
+  - "package-lock.json"
+  - "pnpm-lock.yaml"

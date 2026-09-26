@@ -1,0 +1,96 @@
+{%- comment -%}
+  Reusable long-form SEO block for tool pages.
+
+  Content is driven by page front matter so every page keeps a consistent layout
+  while the copy stays unique (better for search engines than one boilerplate
+  paragraph repeated 40 times):
+
+    guide:
+      eyebrow: How to use it          # optional
+      heading: Duplicate URL Finder   # optional
+      what: One or two sentences describing the tool.
+      steps: ["...", "..."]
+      tips:  ["...", "..."]
+    faq:
+      - q: Question?
+        a: Answer.
+    related:
+      - title: Tool name
+        url: /tools/tool-name.html
+
+  The same front matter also feeds HowTo / FAQPage structured data in _layouts/default.html.
+{%- endcomment -%}
+{%- if page.guide or page.faq -%}
+<section class="guide-section" id="how-to-use">
+  <div class="shell">
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">{{ page.guide.eyebrow | default: "How to use it" }}</span>
+        <h2>{{ page.guide.heading | default: page.title }}</h2>
+      </div>
+      {%- if page.guide.what %}
+      <p>{{ page.guide.what }}</p>
+      {%- endif %}
+    </div>
+
+    <div class="guide-layout">
+      <div>
+        {%- if page.guide.steps %}
+        <div class="guide-card">
+          <h3>{{ page.guide.steps_title | default: "Step by step" }}</h3>
+          <ol class="guide-steps">
+            {%- for step in page.guide.steps %}
+            <li>{{ step }}</li>
+            {%- endfor %}
+          </ol>
+        </div>
+        {%- endif %}
+
+        {%- if page.guide.tips %}
+        <div class="guide-card">
+          <h3>{{ page.guide.tips_title | default: "Tips for better results" }}</h3>
+          <ul class="guide-tips">
+            {%- for tip in page.guide.tips %}
+            <li>{{ tip }}</li>
+            {%- endfor %}
+          </ul>
+        </div>
+        {%- endif %}
+      </div>
+
+      <div>
+        {%- if page.faq %}
+        <div class="guide-card">
+          <h3>{{ page.guide.faq_title | default: "Frequently asked questions" }}</h3>
+          <div class="faq">
+            {%- for item in page.faq %}
+            <details>
+              <summary>{{ item.q }}</summary>
+              <p>{{ item.a }}</p>
+            </details>
+            {%- endfor %}
+          </div>
+        </div>
+        {%- endif %}
+
+        {%- if page.related %}
+        <div class="guide-card">
+          <h3>{{ page.guide.related_title | default: "Related free SEO tools" }}</h3>
+          <ul class="related-list">
+            {%- for item in page.related %}
+            <li><a href="{{ site.baseurl }}{{ item.url }}">{{ item.title }}</a></li>
+            {%- endfor %}
+          </ul>
+        </div>
+        {%- endif %}
+
+        <div class="guide-card guide-cta">
+          <strong>Need this at a larger scale?</strong>
+          <p>Send a plain-text URL list and we will run the workload offline, quality-check the export and deliver a private download link.</p>
+          <a class="button" href="{{ site.baseurl }}/request.html">Request a report</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{%- endif -%}

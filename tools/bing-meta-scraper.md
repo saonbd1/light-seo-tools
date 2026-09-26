@@ -1,7 +1,36 @@
 ---
 layout: default
 title: Bing Meta Scraper
-description: Extract meta tags and page title from pasted HTML.
+seo_title: "Bing Meta Scraper — Extract Title & Meta Tags | Light SEO Tools"
+description: "Extract the title and every meta tag from a page's HTML for free. Paste source or fetch a URL to check descriptions, robots, Open Graph and viewport tags."
+tool: true
+guide:
+  eyebrow: Free browser helper
+  heading: Bing Meta Scraper
+  what: "Paste a page's HTML and the scraper lists the title plus every meta tag with its name, property or http-equiv value — handy for spot-checking descriptions, robots directives and Open Graph data."
+  steps:
+    - "Paste the page source, or enter a URL and click Fetch Source."
+    - "Click Scrape Meta Tags."
+    - "Review the tag list: title first, then each name and content pair."
+    - "Copy the output into a spreadsheet or a ticket for whoever updates the page."
+  tips:
+    - "Check that the description is unique and roughly 150-160 characters instead of a copy of the title."
+    - "Look for a viewport tag to confirm the page is mobile-ready, and a robots tag that is not accidentally set to noindex."
+    - "Open Graph and Twitter tags decide how your link looks when shared, so keep og:title and og:description in sync with the page."
+faq:
+  - q: "What is the difference between name and property meta tags?"
+    a: "name is used for standard metadata such as description, robots and viewport. property is used by Open Graph for social sharing. The scraper lists both so nothing is missed."
+  - q: "Why does a tag show an empty content value?"
+    a: "The attribute existed but was empty in the HTML. An empty description or empty og:image is worse than none for social sharing, so fix those first."
+  - q: "Can I scrape meta tags for many URLs at once?"
+    a: "Yes. The Meta Tag Scraper report processes a plain-text URL list offline and returns URL, title and description columns as CSV or XLSX."
+related:
+  - title: Meta Tag Scraper Report
+    url: /tools/meta-tag-scraper.html
+  - title: Meta Tag Generator
+    url: /tools/meta-tag-generator.html
+  - title: Article Scraper
+    url: /tools/article-scraper.html
 ---
 
 <div class="page-hero"><div class="shell"><span class="eyebrow">Free browser helper</span><h1>Bing Meta Scraper</h1><p class="hero-description">Pull the title and all meta tags from a page's HTML source.</p></div></div>
@@ -99,3 +128,5 @@ document.getElementById('clear').addEventListener('click', function () {
   const s = document.getElementById('status'); s.textContent = ''; s.style.display = 'none';
 });
 </script>
+
+{% include tool-guide.html %}

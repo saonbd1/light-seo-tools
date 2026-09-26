@@ -1,7 +1,36 @@
 ---
 layout: default
 title: Name Generator
-description: Generate random names for placeholder data, testing, or brainstorming.
+seo_title: "Name Generator — Free Random Name Tool for Test Data"
+description: "Generate random full names for placeholder data, testing or brainstorming. Free browser-based generator for up to 500 names at a time, ready to copy."
+tool: true
+guide:
+  eyebrow: Free browser helper
+  heading: Name Generator
+  what: "Produce a batch of random first and last name combinations for test records, form filling, mock listings or outreach-name brainstorming. Nothing is stored and no data leaves your browser."
+  steps:
+    - "Set how many names you need, up to 500 per run."
+    - "Click Generate Names."
+    - "Review the list, one name per line."
+    - "Copy the output into your spreadsheet, fixture file or database seed."
+  tips:
+    - "Generate more names than you need, then remove duplicates before using them as unique keys."
+    - "Pair this with the Email Generator to build matching placeholder contacts for QA."
+    - "These are fictional placeholders, so do not use them to create real accounts or misrepresent identities."
+faq:
+  - q: "Are the generated names real people?"
+    a: "No. They are random combinations from a fixed list of common first and last names, so any resemblance to a real person is coincidental."
+  - q: "How many names can I generate at once?"
+    a: "Up to 500 per run. Repeat the generation and merge the outputs if you need a larger dataset."
+  - q: "Can I get matching email addresses?"
+    a: "Not from this tool, because it only produces full names. Use the Email Generator to create matching addresses for the same test dataset."
+related:
+  - title: Email Generator
+    url: /tools/email-generator.html
+  - title: Sort Text Files
+    url: /tools/sort-text-files.html
+  - title: Remove Duplicate Entries
+    url: /tools/remove-duplicate-entries.html
 ---
 
 <div class="page-hero"><div class="shell"><span class="eyebrow">Free browser helper</span><h1>Name Generator</h1><p class="hero-description">Produce a batch of random full names for seed data, testing, or brainstorming.</p></div></div>
@@ -38,3 +67,5 @@ document.getElementById('run').addEventListener('click', function () {
 document.getElementById('clear').addEventListener('click', function () { document.getElementById('output').value = ''; document.getElementById('copy').style.display = 'none'; });
 document.getElementById('copy').addEventListener('click', function () { const el = document.getElementById('output'); el.select(); document.execCommand('copy'); const b = this, o = b.textContent; b.textContent = 'Copied!'; setTimeout(function () { b.textContent = o; }, 2000); });
 </script>
+
+{% include tool-guide.html %}

@@ -1,7 +1,36 @@
 ---
 layout: default
 title: Bulk Anchor Text Creator
-description: Generate HTML anchor tags from lists of URLs and anchor text.
+seo_title: "Bulk Anchor Text Creator — Build HTML Links Free"
+description: "Turn lists of URLs and anchor text into ready-to-paste HTML links for free. Cycle anchor texts across URLs, add rel attributes and copy the markup."
+tool: true
+guide:
+  eyebrow: Free browser helper
+  heading: Bulk Anchor Text Creator
+  what: "Paste a list of URLs and a list of anchor texts and the tool pairs them into HTML anchor tags, cycling the text list when there are more URLs. Useful for link blocks, resource lists and outreach templates."
+  steps:
+    - "Paste your URLs, one per line."
+    - "Paste the anchor texts you want to rotate, one per line."
+    - "Tick Add rel=nofollow if the links are paid, sponsored or user-generated."
+    - "Click Create Anchors and copy the generated HTML."
+  tips:
+    - "Anchor texts cycle in order, so list the strongest, most descriptive ones first."
+    - "Vary anchor text naturally. A block of identical links reads badly and looks manipulative."
+    - "If your anchor text contains HTML characters, review the generated markup before publishing."
+faq:
+  - q: "What happens if I provide fewer anchor texts than URLs?"
+    a: "The text list repeats from the start until every URL has an anchor, which is how the rotation works."
+  - q: "Does the tool validate the URLs?"
+    a: "No. It builds the markup exactly as you paste it, so check for stray spaces or missing schemes first."
+  - q: "Should I add nofollow?"
+    a: "Use it for paid links, sponsored placements and user-generated content. Leave it off for normal editorial links you trust."
+related:
+  - title: Anchor Text Checker
+    url: /tools/anchor-text-checker.html
+  - title: Dofollow Link Tester
+    url: /tools/dofollow-link-tester.html
+  - title: Extract URL Links
+    url: /tools/extract-url-links.html
 ---
 
 <div class="page-hero"><div class="shell"><span class="eyebrow">Free browser helper</span><h1>Bulk Anchor Text Creator</h1><p class="hero-description">Turn lists of URLs and anchor text into ready-to-paste <code>&lt;a&gt;</code> tags.</p></div></div>
@@ -46,3 +75,5 @@ document.getElementById('run').addEventListener('click', function () {
 document.getElementById('clear').addEventListener('click', function () { document.getElementById('urls').value = ''; document.getElementById('texts').value = ''; document.getElementById('output').value = ''; document.getElementById('meta').style.display = 'none'; document.getElementById('copy').style.display = 'none'; });
 document.getElementById('copy').addEventListener('click', function () { const el = document.getElementById('output'); el.select(); document.execCommand('copy'); const b = this, o = b.textContent; b.textContent = 'Copied!'; setTimeout(function () { b.textContent = o; }, 2000); });
 </script>
+
+{% include tool-guide.html %}

@@ -1,8 +1,50 @@
 ---
 layout: default
-title: Request a report
-description: Submit a URL list for a Scrapebox-backed SEO report.
+title: Request a Report
+seo_title: "Request a Bulk SEO Report — URL Lists Up to 100k Rows"
+description: "Request a Scrapebox-backed SEO report for a large URL list. Upload a plain-text file, choose the fields you need and get a private download link."
+faq:
+  - q: "What file format should I upload?"
+    a: "A plain-text .txt file with one URL, domain or keyword per line. Spreadsheets can be exported to text first, and the report comes back as CSV or XLSX if you prefer."
+  - q: "How large can my list be?"
+    a: "Lists of a few hundred lines are quick. Lists with hundreds of thousands of rows are batched and scheduled, so tell us the count and we will confirm the turnaround."
+  - q: "What do I receive?"
+    a: "A private download link to the finished export as CSV, XLSX, TXT or HTML, with failed lookups flagged rather than silently dropped."
+  - q: "What happens to my data?"
+    a: "Input lists and reports are retained only as long as needed to deliver the work and answer follow-up questions. See the privacy policy for details."
+guide:
+  eyebrow: How the workflow runs
+  heading: Sending a URL list for processing
+  what: "The form collects the essentials. The list is then processed offline with Scrapebox, checked for gaps, and delivered as a private link."
+  steps:
+    - "Export your URLs, domains or keywords to a plain-text .txt file with one entry per line."
+    - "Choose the report type and add any extra fields you need in the notes."
+    - "Submit the form with an email address we can reply to."
+    - "We process the list offline, quality-check the output and send the private download link."
+  tips:
+    - "Deduplicate first with the free Duplicate URL Finder so you never process the same URL twice."
+    - "Split lists beyond roughly 100,000 lines into batches, which keeps failed lookups cheap to re-run."
+    - "Use bare URLs for page-level checks and bare domains for WHOIS, DNS or nameserver workflows."
+  related_title: Report types to explore
+related:
+  - title: Duplicate URL Report
+    url: /tools/duplicate-url-report.html
+  - title: Meta Tag Scraper Report
+    url: /tools/meta-tag-scraper.html
+  - title: All free SEO tools
+    url: /tools/tools-overview.html
 ---
 
 <section class="page-hero"><div class="shell"><span class="eyebrow">Scrapebox processing</span><h1>Request a report.</h1><p>Send your list and we will process it offline, quality-check the export, and deliver a private download link.</p></div></section>
 <section class="content"><div class="shell form-layout"><aside class="context-panel"><span class="eyebrow">What happens next</span><h2>From URL list to clean export.</h2><p>Share the essentials and we’ll take care of the processing workflow.</p><ul><li>Upload one URL per line in a plain-text file.</li><li>Choose the report fields you need.</li><li>Receive a private download link.</li></ul></aside><div class="form-shell"><div class="card form-card"><div class="notice">For Scrapebox workflows, upload a plain-text <strong>.txt</strong> file with one URL per line.</div><form action="{{ site.formspree_endpoint | default: 'https://formspree.io/f/your-id' }}" method="POST" enctype="multipart/form-data"><label for="email">Your email</label><input id="email" type="email" name="email" placeholder="you@example.com" required><label for="report_type">Report type</label><select id="report_type" name="report_type"><option>Duplicate URL Finder</option><option>Meta Tag Scraper</option><option>Broken Link Checker</option><option>Keyword Harvest</option><option>Custom / Other</option></select><label for="url_file">URL list (.txt)</label><input id="url_file" type="file" name="url_file" accept=".txt" required><label for="notes">Notes</label><textarea id="notes" name="notes" rows="5" placeholder="Tell us about the list or fields you need."></textarea><button class="button" type="submit">Submit request</button></form></div></div></div></section>
+
+<section class="section alt"><div class="shell"><div class="section-heading"><div><span class="eyebrow">What can be processed</span><h2>Bulk SEO report types</h2></div><p>Each workflow takes a plain-text list and returns structured data you can open in a spreadsheet.</p></div><div class="cards">
+<article class="card"><h3>Metadata &amp; duplicates</h3><p>Remove repeated URLs or extract titles and descriptions for every page in a list.</p><a href="{{ site.baseurl }}/tools/meta-tag-scraper.html">Meta Tag Scraper Report →</a></article>
+<article class="card"><h3>Index coverage</h3><p>Check which URLs are indexed in Google or Bing, with the matched result for each hit.</p><a href="{{ site.baseurl }}/tools/google-index-checker.html">Google Index Checker →</a></article>
+<article class="card"><h3>Domains &amp; hosting</h3><p>WHOIS records, DNS answers, nameservers and domain availability for whole domain lists.</p><a href="{{ site.baseurl }}/tools/whois-scraper.html">Whois Scraper →</a></article>
+<article class="card"><h3>Link health</h3><p>Crawl a site for broken links and redirect chains, or test which URLs still respond.</p><a href="{{ site.baseurl }}/tools/alive-url-checker.html">Alive URL Checker →</a></article>
+<article class="card"><h3>Brand &amp; social</h3><p>Find the social profiles behind a list of sites, or check username availability before launch.</p><a href="{{ site.baseurl }}/tools/social-account-scraper.html">Social Account Scraper →</a></article>
+<article class="card"><h3>Short links &amp; rank</h3><p>Shorten a long URL list in one pass, or pull rank and traffic estimates for domains.</p><a href="{{ site.baseurl }}/tools/mass-url-shortener.html">Mass URL Shortener →</a></article>
+</div></div></section>
+
+{% include tool-guide.html %}

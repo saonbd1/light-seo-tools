@@ -1,6 +1,36 @@
 ---
 layout: default
 title: Redirect Checker
+seo_title: "Redirect Checker — Free 301 & 302 Status Code Tool | Light SEO Tools"
+description: "Check any URL for 301, 302, 307 and 308 redirects for free. See the full redirect chain, HTTP status codes and the final destination URL instantly."
+tool: true
+guide:
+  eyebrow: Free browser helper
+  heading: Redirect Checker
+  what: "Paste a list of URLs and the checker reports the status code, every hop in the redirect chain and the final destination. Requests run through a server-side proxy, so results do not depend on the target site's CORS policy."
+  steps:
+    - "Paste one URL per line into the input box."
+    - "Click Check Redirects. Each URL is requested and followed through its redirect chain."
+    - "Read the colour-coded cards: status code, number of hops and the final URL for each entry."
+    - "Click Copy Results to keep the plain-text summary for a report or spreadsheet."
+  tips:
+    - "Permanent 301 and 308 hops pass ranking signals; temporary 302 and 307 hops do not, so change accidental temporary redirects when a move is permanent."
+    - "Chains of three or more hops slow the first byte and dilute signals — point every redirect straight at the final URL."
+    - "Redirect a removed page to its closest replacement, not the homepage, to keep topical relevance."
+faq:
+  - q: "Can I check redirects for a whole site?"
+    a: "Use this checker for spot checks. For full-site crawls with thousands of URLs and a CSV of every chain, request a broken link and redirect report."
+  - q: "Why do I see a proxy error for some URLs?"
+    a: "The checker calls a remote proxy because browsers block cross-origin requests. If the proxy is unreachable or rate-limited you get an error card for that URL only — retry and it usually clears."
+  - q: "Do redirects hurt SEO?"
+    a: "One permanent redirect is normal and passes signals. The real problems are long chains, loops, and temporary redirects used for permanent moves."
+related:
+  - title: Alive URL Checker
+    url: /tools/alive-url-checker.html
+  - title: Sitemap Scraper
+    url: /tools/sitemap-scraper.html
+  - title: Link Extractor
+    url: /tools/link-extractor.html
 ---
 
 <div class="page-hero">
@@ -253,3 +283,5 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 </script>
+
+{% include tool-guide.html %}

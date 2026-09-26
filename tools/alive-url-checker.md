@@ -1,7 +1,36 @@
 ---
 layout: default
 title: Alive URL Checker
-description: Check which URLs in a list are still reachable.
+seo_title: "Alive URL Checker — Free Broken Link Tester | Light SEO Tools"
+description: "Check which URLs in a list are still alive for free. Paste your URLs and get alive or dead status for each one, with a plain-text list you can copy."
+tool: true
+guide:
+  eyebrow: Free browser helper
+  heading: Alive URL Checker
+  what: "Paste a URL list and the checker requests each one through a public proxy, reporting the HTTP status so you can catch dead links, removed pages and hard 404s before your visitors do."
+  steps:
+    - "Paste one URL per line into the input box."
+    - "Click Check URLs and let the progress line run."
+    - "Review the badges: alive for successful responses, dead for 4xx, 5xx and network failures."
+    - "Copy the plain-text output and use the dead list as your redirect or removal queue."
+  tips:
+    - "Treat redirects as a to-do rather than a failure — update the link so users skip the extra hop."
+    - "Split long lists into batches of a few hundred URLs; public proxies throttle heavy use."
+    - "For a site-wide crawl with a CSV of every status code, request a broken link report instead."
+faq:
+  - q: "Why do some URLs show as dead when they load in my browser?"
+    a: "Sites that block automated requests, require cookies or rate-limit the proxy can return an error even though the page works for a human. Spot-check anything surprising before acting on it."
+  - q: "How many URLs can I check at once?"
+    a: "A few hundred per run is realistic, because each URL is requested individually and the public proxy throttles heavy use."
+  - q: "Is the checker free?"
+    a: "Yes, with no account and no charge. When you need volume, the offline report workflow uses direct requests instead of a shared proxy."
+related:
+  - title: Redirect Checker
+    url: /tools/redirect-checker.html
+  - title: Link Extractor
+    url: /tools/link-extractor.html
+  - title: Outbound Link Checker
+    url: /tools/outbound-link-checker.html
 ---
 
 <div class="page-hero"><div class="shell"><span class="eyebrow">Free browser helper</span><h1>Alive URL Checker</h1><p class="hero-description">Test each URL in a list and flag which ones respond.</p></div></div>
@@ -83,3 +112,5 @@ document.getElementById('run').addEventListener('click', async function () {
 document.getElementById('clear').addEventListener('click', function () { document.getElementById('input').value = ''; document.getElementById('output').value = ''; document.getElementById('results').innerHTML = ''; document.getElementById('results').style.display = 'none'; document.getElementById('meta').style.display = 'none'; document.getElementById('copy').style.display = 'none'; document.getElementById('status').style.display = 'none'; });
 document.getElementById('copy').addEventListener('click', function () { const el = document.getElementById('output'); el.select(); document.execCommand('copy'); const b = this, o = b.textContent; b.textContent = 'Copied!'; setTimeout(function () { b.textContent = o; }, 2000); });
 </script>
+
+{% include tool-guide.html %}

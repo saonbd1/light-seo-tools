@@ -1,6 +1,36 @@
 ---
 layout: default
 title: Duplicate URL Finder
+seo_title: "Duplicate URL Finder — Free Online URL Dedupe Tool | Light SEO Tools"
+description: "Remove duplicate URLs from a list for free. Paste one URL per line and get a clean, unique list back in your browser, with duplicate counts you can copy."
+tool: true
+guide:
+  eyebrow: Free browser helper
+  heading: Duplicate URL Finder
+  what: "Paste a URL list and this tool keeps the first occurrence of each line, so you can feed clean input into crawlers, indexers or Scrapebox runs without paying to process the same URL twice."
+  steps:
+    - "Copy your URL list from a spreadsheet, crawl export or Scrapebox output — one URL per line."
+    - "Paste the list into the Input URLs box. Surrounding whitespace is trimmed automatically."
+    - "Click Remove Duplicates."
+    - "Check the counters for URLs submitted, unique URLs and duplicates removed, then copy the clean list."
+  tips:
+    - "Matching is exact: http and https, or a URL with and without a trailing slash, count as different entries. Normalise first with Trim URL to Root if you want looser matching."
+    - "The whole check runs inside your browser, so client URL lists never leave your machine."
+    - "For lists in the hundreds of thousands, request a Scrapebox report — it also handles case-insensitive matching and URL normalisation."
+faq:
+  - q: "Is this duplicate URL finder really free?"
+    a: "Yes. It is a static browser tool with no account, no upload and no usage limit. You can run it as often as you like."
+  - q: "Does it find near-duplicate URLs?"
+    a: "No, it removes exact line matches only. URLs that differ by protocol, www prefix, trailing slash or query string are kept, so normalise your list first if you want those treated as one URL."
+  - q: "How many URLs can I paste at once?"
+    a: "Practical limits depend on your browser memory, but lists of tens of thousands of lines usually work fine. For very large files, send the list as a report request."
+related:
+  - title: Remove Duplicate Entries
+    url: /tools/remove-duplicate-entries.html
+  - title: Trim URL to Root
+    url: /tools/trim-url-to-root.html
+  - title: Merge Duplicate Links
+    url: /tools/merge-duplicate-links.html
 ---
 
 <div class="page-hero">
@@ -78,3 +108,5 @@ document.getElementById('copy').addEventListener('click', function(){
   setTimeout(() => { btn.textContent = orig; }, 2000);
 });
 </script>
+
+{% include tool-guide.html %}
