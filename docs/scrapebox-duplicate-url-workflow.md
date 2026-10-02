@@ -1,5 +1,7 @@
 # Scrapebox Duplicate URL Finder Workflow
 
+> Archived: this workflow is retired and is not offered by the active site.
+
 ## Purpose
 
 Process a submitted URL list in Scrapebox, remove duplicate entries, and deliver Scrapebox's unique-URL export in HTML, TXT, CSV, or XLSX format.

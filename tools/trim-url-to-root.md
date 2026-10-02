@@ -1,7 +1,36 @@
 ---
 layout: default
 title: Trim URL to Root
-description: Reduce a list of URLs to their root origin (scheme and host).
+seo_title: "Trim URL to Root — Get Scheme and Host From URLs Free"
+description: "Strip a URL list down to scheme and host for free. Paste your URLs and get the origin of each, with paths, folders and query strings removed in one click."
+tool: true
+guide:
+  eyebrow: Free browser helper
+  heading: Trim URL to Root
+  what: "Paste full URLs and the trimmer keeps only the scheme and host — the origin — so https://example.com/blog/post?x=1 becomes https://example.com. Useful for grouping a mixed list by site."
+  steps:
+    - "Paste one URL per line. Invalid entries are skipped."
+    - "Click Trim to Root."
+    - "Check the counters for input URLs and output roots."
+    - "Copy the roots and deduplicate them for a clean list of origins."
+  tips:
+    - "Use roots to count how many URLs a crawl covers per host, which quickly shows how spread out a scraping run is."
+    - "The www prefix is preserved here, so normalise www and non-www afterwards if you need them merged."
+    - "For hostname-only output that strips www, use Trim URL to Domain instead."
+faq:
+  - q: "What is a URL origin?"
+    a: "The scheme plus the host, for example https://www.example.com. Everything after the host — path, query and fragment — is dropped."
+  - q: "Does this keep the www prefix?"
+    a: "Yes. The host you paste is preserved exactly, including www, subdomains and port numbers."
+  - q: "How is this different from Trim URL to Domain?"
+    a: "This tool keeps the scheme and any www prefix. Trim URL to Domain returns only the hostname and removes www for consistency."
+related:
+  - title: Trim URL to Domain
+    url: /tools/trim-url-to-domain.html
+  - title: Trim URL to First Folder
+    url: /tools/trim-url-to-first-folder.html
+  - title: Extract URL Links
+    url: /tools/extract-url-links.html
 ---
 
 <div class="page-hero"><div class="shell"><span class="eyebrow">Free browser helper</span><h1>Trim URL to Root</h1><p class="hero-description">Keep only the scheme and host of each URL, dropping paths and query strings.</p></div></div>
@@ -41,3 +70,5 @@ document.getElementById('run').addEventListener('click', function () {
 document.getElementById('clear').addEventListener('click', function () { document.getElementById('input').value = ''; document.getElementById('output').value = ''; document.getElementById('meta').style.display = 'none'; document.getElementById('copy').style.display = 'none'; });
 document.getElementById('copy').addEventListener('click', function () { const el = document.getElementById('output'); el.select(); document.execCommand('copy'); const b = this, o = b.textContent; b.textContent = 'Copied!'; setTimeout(function () { b.textContent = o; }, 2000); });
 </script>
+
+{% include tool-guide.html %}

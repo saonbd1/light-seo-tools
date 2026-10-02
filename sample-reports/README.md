@@ -1,10 +1,7 @@
-Sample Reports Folder
+# Archived Sample Reports
 
-This folder is for example Scrapebox-exported reports. Do NOT store real client data in the repository for production. Use cloud storage or a private repo for real reports.
+Files in this directory are historical examples retained for reference only. They are
+not used by an active report-request or delivery workflow.
 
-Example filenames:
-- duplicate-urls-sample.csv
-- meta-scrape-sample.csv
-- broken-links-sample.csv
-
-When processing a user request, the admin should upload the generated report to a private cloud (Dropbox/Drive) and paste the download link in the request tracking system, or upload to the site admin area (if implemented).
+Do not add real user data or production reports to this repository. The active site
+provides browser-based SEO tools; see the [tool directory](../tools/tools-overview.md).

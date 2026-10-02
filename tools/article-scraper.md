@@ -1,7 +1,36 @@
 ---
 layout: default
 title: Article Scraper
-description: Extract readable article text from pasted HTML.
+seo_title: "Article Scraper — Free Readable Text Extractor Tool | Light SEO Tools"
+description: "Extract readable article text from any page for free. Paste HTML or fetch a URL and the scraper strips navigation, scripts and styles, then counts the words."
+tool: true
+guide:
+  eyebrow: Free browser helper
+  heading: Article Scraper
+  what: "Fetch a page or paste its HTML and the scraper removes scripts, styles, navigation, headers, footers and forms, then returns the readable text with word and character counts."
+  steps:
+    - "Paste the page HTML, or enter a URL and click Fetch Source."
+    - "Click Scrape Text."
+    - "Review the cleaned text and the word and character counters."
+    - "Copy the text into a content brief, keyword analysis or editor."
+  tips:
+    - "The scraper prefers an article element when the page has one, so results are cleanest on well-structured blogs and news sites."
+    - "Use the word count as a quick depth check when comparing your page with the pages already ranking for the same term."
+    - "If you only need the links, use Extract URL Links instead of cleaning the whole document."
+faq:
+  - q: "Does the scraper remove ads and sidebars?"
+    a: "It removes common non-article elements such as scripts, styles, navigation, asides, forms, headers and footers. Ads inside the article container can still appear, so skim the output before reusing it."
+  - q: "Why is the fetched text empty on some sites?"
+    a: "Pages that render their content with JavaScript return little or no readable text. Copy the HTML from your browser's developer tools and paste it in instead."
+  - q: "Can I republish the extracted text?"
+    a: "The tool gives you the text, not the rights to it. Always respect the source site's licence and terms before republishing."
+related:
+  - title: Extract URL Links
+    url: /tools/extract-url-links.html
+  - title: Bing Meta Scraper
+    url: /tools/bing-meta-scraper.html
+  - title: Bandwidth Meter
+    url: /tools/bandwidth-meter.html
 ---
 
 <div class="page-hero"><div class="shell"><span class="eyebrow">Free browser helper</span><h1>Article Scraper</h1><p class="hero-description">Pull the readable text out of a page's HTML, stripping navigation, scripts, and styles.</p></div></div>
@@ -81,3 +110,5 @@ document.getElementById('clear').addEventListener('click', function () {
   const s = document.getElementById('status'); s.textContent = ''; s.style.display = 'none';
 });
 </script>
+
+{% include tool-guide.html %}

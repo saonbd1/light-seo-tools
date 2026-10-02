@@ -1,5 +1,8 @@
 # Report Templates and Delivery
 
+> Archived: these instructions describe a retired report-request workflow. They are
+> retained for historical reference and are not used by the active site.
+
 ## Standard report naming
 
 Use the request ID in every filename:

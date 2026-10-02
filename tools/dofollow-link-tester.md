@@ -1,7 +1,36 @@
 ---
 layout: default
 title: Dofollow Link Tester
-description: Detect dofollow and nofollow links in pasted HTML.
+seo_title: "Dofollow Link Tester — Check Link rel Attributes | Light SEO Tools"
+description: "Test links for dofollow or nofollow in seconds. Paste HTML or fetch a URL to see every link's rel attribute and count dofollow versus nofollow links for free."
+tool: true
+guide:
+  eyebrow: Free browser helper
+  heading: Dofollow Link Tester
+  what: "The tester reads every link in a page's HTML, checks its rel attribute and splits the results into dofollow and nofollow, so you can confirm at a glance whether links pass signals."
+  steps:
+    - "Paste the page source, or enter a URL and click Fetch Source."
+    - "Click Test Links."
+    - "Review the two groups: links with no restrictive rel, and links carrying nofollow, sponsored or ugc."
+    - "Copy the list to document outreach targets or audit your own link policy."
+  tips:
+    - "nofollow, sponsored and ugc all signal that a link should not pass ranking signals, so check for all three rather than only 'nofollow'."
+    - "Some search engines treat these hints loosely, so never assume a dofollow link guarantees ranking equity."
+    - "On your own site, mark paid and user-generated links as sponsored or ugc to stay inside search engine guidelines."
+faq:
+  - q: "What is the difference between dofollow and nofollow?"
+    a: "A dofollow link has no restrictive rel attribute, so it may pass signals. A nofollow, sponsored or ugc link tells search engines not to count it for ranking."
+  - q: "Can a whole page be nofollow?"
+    a: "Yes. A robots meta tag with nofollow, or an X-Robots-Tag header, applies to every link on the page. This tester reads link-level rel attributes, so check the robots tag separately with the Bing Meta Scraper."
+  - q: "Are nofollow links useless?"
+    a: "No. They still send traffic and they can support discovery and citations. They are simply not intended to pass ranking signals."
+related:
+  - title: Anchor Text Checker
+    url: /tools/anchor-text-checker.html
+  - title: Outbound Link Checker
+    url: /tools/outbound-link-checker.html
+  - title: Bing Meta Scraper
+    url: /tools/bing-meta-scraper.html
 ---
 
 <div class="page-hero"><div class="shell"><span class="eyebrow">Free browser helper</span><h1>Dofollow Link Tester</h1><p class="hero-description">Classify every link as dofollow or nofollow based on its <code>rel</code> attribute.</p></div></div>
@@ -103,3 +132,5 @@ document.getElementById('clear').addEventListener('click', function () {
   const s = document.getElementById('status'); s.textContent = ''; s.style.display = 'none';
 });
 </script>
+
+{% include tool-guide.html %}

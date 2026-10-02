@@ -1,7 +1,36 @@
 ---
 layout: default
 title: Sort Text Files
-description: Sort lines of text alphabetically or numerically.
+seo_title: "Sort Text Files — Alphabetical & Numeric Sorter Free"
+description: "Sort any text list alphabetically or numerically for free, ascending or descending, with optional duplicate removal. Paste your lines and copy the sorted result."
+tool: true
+guide:
+  eyebrow: Free browser helper
+  heading: Sort Text Files
+  what: "Paste a list and sort it alphabetically or numerically in either direction, with an optional dedupe step. Sorting makes duplicates and near-duplicates obvious and keeps exports tidy."
+  steps:
+    - "Paste one entry per line."
+    - "Choose the order: ascending or descending."
+    - "Choose the mode: alphabetical for text, numeric when entries are counts, prices or ranks."
+    - "Tick Remove duplicates for a sorted unique list, then click Sort."
+  tips:
+    - "Numeric mode reads the leading number in each line, so sort the values before adding labels to them."
+    - "Alphabetical sorting uses locale rules, which handle accented characters sensibly."
+    - "Sort, then deduplicate, then export — that order produces the cleanest client-ready list."
+faq:
+  - q: "Why does 10 sort before 2 in alphabetical mode?"
+    a: "Alphabetical mode compares text, so it looks at characters rather than value. Switch to numeric mode and 2 correctly sorts before 10."
+  - q: "Will it keep my formatting?"
+    a: "Each line is trimmed of surrounding spaces and then sorted as a whole. Internal spacing and punctuation are preserved."
+  - q: "Can I sort a single CSV column?"
+    a: "Not directly, because this tool works on whole lines. Extract the column first, sort it here, then paste it back into your spreadsheet."
+related:
+  - title: Remove Duplicate Entries
+    url: /tools/remove-duplicate-entries.html
+  - title: Split Text File
+    url: /tools/split-text-file.html
+  - title: Duplicate URL Finder
+    url: /tools/duplicate-url-finder.html
 ---
 
 <div class="page-hero"><div class="shell"><span class="eyebrow">Free browser helper</span><h1>Sort Text Files</h1><p class="hero-description">Sort a list alphabetically or numerically, ascending or descending.</p></div></div>
@@ -49,3 +78,5 @@ document.getElementById('run').addEventListener('click', function () {
 document.getElementById('clear').addEventListener('click', function () { document.getElementById('input').value = ''; document.getElementById('output').value = ''; document.getElementById('meta').style.display = 'none'; document.getElementById('copy').style.display = 'none'; });
 document.getElementById('copy').addEventListener('click', function () { const el = document.getElementById('output'); el.select(); document.execCommand('copy'); const b = this, o = b.textContent; b.textContent = 'Copied!'; setTimeout(function () { b.textContent = o; }, 2000); });
 </script>
+
+{% include tool-guide.html %}

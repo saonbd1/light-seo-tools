@@ -1,7 +1,36 @@
 ---
 layout: default
 title: Email Generator
-description: Generate random email addresses for testing and placeholder data.
+seo_title: "Email Generator — Free Random Email Address Maker"
+description: "Create random email addresses on your own domain for testing. Free browser-based generator for up to 500 addresses per run, with a custom domain option."
+tool: true
+guide:
+  eyebrow: Free browser helper
+  heading: Email Generator
+  what: "Generate batches of realistic placeholder email addresses on a domain you choose — ideal for populating staging databases, forms and fixtures without touching real inboxes."
+  steps:
+    - "Enter the domain to use, for example example.com."
+    - "Set how many addresses you need, up to 500."
+    - "Click Generate Emails."
+    - "Copy the list into your test data."
+  tips:
+    - "Use a domain you own so nothing can be delivered to a real person by accident."
+    - "Keep the domain stable between runs so fixtures stay predictable in your test suite."
+    - "Pair the output with the Name Generator when you need matching names and addresses."
+faq:
+  - q: "Do these addresses receive mail?"
+    a: "No. They are generated strings only. Nothing is registered and nothing is sent, which is why you should only use domains you control."
+  - q: "Can I choose the address format?"
+    a: "Addresses use a first.last plus number pattern on the domain you enter, which keeps them realistic while staying unique."
+  - q: "How many can I generate at once?"
+    a: "Up to 500 per run. Repeat the generation if you need a larger test set."
+related:
+  - title: Name Generator
+    url: /tools/name-generator.html
+  - title: Remove Duplicate Entries
+    url: /tools/remove-duplicate-entries.html
+  - title: Sort Text Files
+    url: /tools/sort-text-files.html
 ---
 
 <div class="page-hero"><div class="shell"><span class="eyebrow">Free browser helper</span><h1>Email Generator</h1><p class="hero-description">Create a batch of random, realistic email addresses with a custom domain.</p></div></div>
@@ -45,3 +74,5 @@ document.getElementById('run').addEventListener('click', function () {
 document.getElementById('clear').addEventListener('click', function () { document.getElementById('output').value = ''; document.getElementById('copy').style.display = 'none'; });
 document.getElementById('copy').addEventListener('click', function () { const el = document.getElementById('output'); el.select(); document.execCommand('copy'); const b = this, o = b.textContent; b.textContent = 'Copied!'; setTimeout(function () { b.textContent = o; }, 2000); });
 </script>
+
+{% include tool-guide.html %}

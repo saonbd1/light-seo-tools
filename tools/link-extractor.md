@@ -2,7 +2,36 @@
 layout: default
 title: Link Extractor
 permalink: /tools/link-extractor.html
-description: Extract internal links from a website up to three crawl levels deep.
+seo_title: "Free Link Extractor — Crawl Site Links 3 Levels Deep | Light SEO Tools"
+description: "Crawl a website in your browser and export every internal link up to three levels deep. Free internal link extractor for quick site maps and orphan page checks."
+tool: true
+guide:
+  eyebrow: Free crawl helper
+  heading: Link Extractor
+  what: "Enter a starting URL and the crawler follows same-origin links level by level, building a de-duplicated list of internal URLs. It is the fastest way to see the shape of a site without installing anything."
+  steps:
+    - "Paste the starting URL — usually the homepage or a section hub."
+    - "Choose a crawl depth. One level scans only the start page, three levels builds a deeper internal map."
+    - "Click Extract links and watch the status line as each level is fetched."
+    - "Copy the unique URLs into your spreadsheet, crawler or index-submission tool."
+  tips:
+    - "Depth 2 is usually enough to capture main navigation and section pages; depth 3 adds long-tail articles."
+    - "Compare the output with your sitemap.xml to find pages that exist but are never linked internally."
+    - "If a site blocks browser requests you will see only a handful of URLs — that is CORS, not an empty site."
+faq:
+  - q: "Why does the crawl stop after a few pages?"
+    a: "Almost always because the site blocks cross-origin browser requests or renders links with JavaScript. The browser can only read pages the site is willing to share."
+  - q: "Is crawling a site from my browser safe?"
+    a: "Requests come from your own browser and your own connection, and the tool only follows internal links at the depth you choose. Keep depth modest and respect the target site's terms."
+  - q: "Can I crawl a very large website?"
+    a: "For protected, JavaScript-heavy or very large sites, request a processed crawl report. The offline workflow supports adjustable depth and much larger page budgets."
+related:
+  - title: Sitemap Scraper
+    url: /tools/sitemap-scraper.html
+  - title: Alive URL Checker
+    url: /tools/alive-url-checker.html
+  - title: Anchor Text Checker
+    url: /tools/anchor-text-checker.html
 ---
 
 <section class="page-hero"><div class="shell"><span class="eyebrow">Crawl helper</span><h1>Extract links up to 3 levels deep.</h1><p class="hero-description">Map the internal links connected to a starting page without uploading your site. Choose a crawl depth, then export the unique URLs found.</p></div></section>
@@ -18,3 +47,5 @@ description: Extract internal links from a website up to three crawl levels deep
   copy.addEventListener('click',async()=>{await navigator.clipboard.writeText(output.value);copy.textContent='Copied';setTimeout(()=>copy.textContent='Copy',1500)});
 })();
 </script>
+
+{% include tool-guide.html %}

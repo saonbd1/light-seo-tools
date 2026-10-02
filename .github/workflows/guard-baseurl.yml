@@ -1,0 +1,57 @@
+# Guardrail: this repository is the project site that GitHub Pages publishes at
+# https://saonbd1.github.io/light-seo-tools/ - the published path is the repository
+# name, and baseurl/url in _config.yml have to agree with it.
+#
+# If baseurl drifts (for example back to "" like the root-hosted experiment), every
+# link and canonical silently points somewhere else and the site looks broken while
+# still building green. This check fails instead.
+name: Guard baseurl
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    name: baseurl must stay /light-seo-tools
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check _config.yml
+        run: |
+          set -euo pipefail
+          baseurl="$(grep -E '^baseurl:' _config.yml | head -1 | sed -E 's/^baseurl:[[:space:]]*//; s/^"//; s/"$//')"
+          url="$(grep -E '^url:' _config.yml | head -1 | sed -E 's/^url:[[:space:]]*//; s/^"//; s/"$//')"
+          echo "baseurl = '$baseurl'"
+          echo "url     = '$url'"
+          if [ "$baseurl" != "/light-seo-tools" ]; then
+            echo "::error::baseurl must be '/light-seo-tools' (found '$baseurl')."
+            echo "This repository is published at https://saonbd1.github.io/light-seo-tools/; the Pages path equals the repository name."
+            exit 1
+          fi
+          # `url` may change if you attach a custom domain, so only its shape is pinned:
+          # absolute_url builds every canonical, Open Graph, JSON-LD and sitemap URL from it.
+          if ! printf '%s' "$url" | grep -Eq '^https://[A-Za-z0-9.-]+$'; then
+            echo "::error::url must be an https origin without path or trailing slash (found '$url')."
+            exit 1
+          fi
+          if [ ! -f sitemap.xml ] || [ ! -f robots.txt ]; then
+            echo "::error::sitemap.xml and robots.txt must stay in the repository root."
+            exit 1
+          fi
+          echo "OK - baseurl, url, sitemap and robots.txt all match the published location."
+
+      - name: Check the root-only verification file is not here
+        run: |
+          set -euo pipefail
+          if [ -f googleb05f2511ab0eee73.html ]; then
+            echo "::error::googleb05f2511ab0eee73.html verifies the domain root, so it belongs in saonbd1/saonbd1.github.io - not in this repository."
+            exit 1
+          fi
+          echo "OK - verification file is not here."

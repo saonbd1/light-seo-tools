@@ -1,6 +1,6 @@
 # Tools Overview
 
-This folder contains individual pages for each tool. The site offers lightweight browser-side helpers and a set of advanced, Scrapebox-backed report types. The advanced types are processed offline and delivered as downloadable CSV/HTML/PDF.
+This folder contains individual pages for each tool. Active tools are lightweight browser-side helpers.
 
 ## Implemented Browser Helpers (Free)
 
@@ -19,6 +19,7 @@ This folder contains individual pages for each tool. The site offers lightweight
 - Sitemap Scraper - Fetch a sitemap.xml and extract its URLs
 - Alive URL Checker - Check which URLs are still reachable
 - Bandwidth Meter - Estimate the download size of a URL
+- OCR Image to Text - Convert image to text using client-side optical character recognition
 - Trim URL to Domain - Strip URLs down to their domain
 - Trim URL to Root - Strip URLs down to their origin
 - Trim URL to First Folder - Keep the origin plus the first path segment
@@ -31,19 +32,4 @@ This folder contains individual pages for each tool. The site offers lightweight
 - Extract URL Links - Pull all URLs from text or HTML
 - Legal Page Generator - Generate Terms, Privacy Policy, and Affiliate Disclosure text
 
-## Scrapebox-Backed Workflows
-
-- Duplicate URL Report - Receive a cleaned unique-URL export in HTML, TXT, CSV, or XLSX
-- Meta Tag Scraper - Extract URL, title, description, and optional page fields
-- Broken Link Checker - Request a crawl report for broken and redirected links
-- Alexa Rank Checker - Check global and country rank for domains
-- Domain Resolver Tool - Resolve domains to IPs and DNS records
-- Mass URL Shortener - Shorten a list of URLs in bulk
-- Social Account Scraper - Find social profiles linked to domains
-- Vanity Name Checker - Check username availability across platforms
-- Whois Scraper - Extract WHOIS registration details
-- Tdname Scrapper - Scrape domain listings and pricing
-- Google Index Checker - Check whether URLs are indexed in Google
-- Bing Index Checker - Check whether URLs are indexed in Bing
-- Check Unregistered Domain - Find domains still available to register
-- Bulk Nameserver Extractor - Extract nameservers for domains
+Legacy report workflow URLs are retained as noindex retirement notices; they are not active tools.

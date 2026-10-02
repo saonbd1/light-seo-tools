@@ -1,7 +1,36 @@
 ---
 layout: default
 title: Sitemap Scraper
-description: Fetch a sitemap.xml and extract all listed URLs.
+seo_title: "Sitemap Scraper — Extract All URLs From sitemap.xml Free"
+description: "Extract every URL from a sitemap.xml for free. Enter a domain or sitemap URL and the scraper returns a deduplicated list of all loc entries you can copy."
+tool: true
+guide:
+  eyebrow: Free browser helper
+  heading: Sitemap Scraper
+  what: "Point the scraper at a sitemap file or a bare domain and it pulls every loc entry, removes duplicates and returns a clean URL list — the quickest way to compare what a site claims to have against what search engines actually know about."
+  steps:
+    - "Enter the sitemap URL, or just the domain and the tool will try /sitemap.xml."
+    - "Click Scrape Sitemap."
+    - "Review the URL count and the extracted list."
+    - "Copy the URLs into your index checker, crawl tool or spreadsheet."
+  tips:
+    - "Sitemap indexes list child sitemap files rather than pages. If you only get a few .xml URLs back, scrape those children individually."
+    - "Compare the sitemap list with crawl output to find orphan pages — URLs in the sitemap that no page links to."
+    - "Stay inside the 50,000 URL and 50MB limits per file and reference your sitemap from both robots.txt and any sitemap index."
+faq:
+  - q: "What is the difference between a sitemap and a sitemap index?"
+    a: "A sitemap lists page URLs. A sitemap index lists other sitemap files. If the scraper returns only a handful of .xml URLs, you are looking at an index and should scrape its children."
+  - q: "Does the sitemap show which pages are indexed?"
+    a: "No. A sitemap only declares the pages you want crawled. To confirm index coverage, use the Google Index Checker or Bing Index Checker report."
+  - q: "Why does the fetch fail on some sites?"
+    a: "Sites that block cross-origin requests, or that keep the sitemap behind a firewall, cannot be read from the browser. In that case request a processed report."
+related:
+  - title: Link Extractor
+    url: /tools/link-extractor.html
+  - title: Google Index Checker
+    url: /tools/google-index-checker.html
+  - title: Bing Index Checker
+    url: /tools/bing-index-checker.html
 ---
 
 <div class="page-hero"><div class="shell"><span class="eyebrow">Free browser helper</span><h1>Sitemap Scraper</h1><p class="hero-description">Load a sitemap.xml and extract every <code>&lt;loc&gt;</code> URL it contains.</p></div></div>
@@ -70,3 +99,5 @@ document.getElementById('run').addEventListener('click', async function () {
 document.getElementById('clear').addEventListener('click', function () { document.getElementById('input').value = ''; document.getElementById('output').value = ''; document.getElementById('meta').style.display = 'none'; document.getElementById('copy').style.display = 'none'; document.getElementById('status').style.display = 'none'; });
 document.getElementById('copy').addEventListener('click', function () { const el = document.getElementById('output'); el.select(); document.execCommand('copy'); const b = this, o = b.textContent; b.textContent = 'Copied!'; setTimeout(function () { b.textContent = o; }, 2000); });
 </script>
+
+{% include tool-guide.html %}

@@ -1,8 +1,28 @@
 ---
 layout: default
 title: Contact
-description: Contact Light SEO Tools for help with SEO report workflows.
+seo_title: "Contact Light SEO Tools — Help Choosing a Tool"
+description: "Contact Light SEO Tools with a question about a browser-based SEO tool or to get help choosing the right tool for your task."
+faq:
+  - q: "How quickly will I hear back?"
+    a: "Most messages are answered within one working day."
+  - q: "Can you recommend a tool for my task?"
+    a: "Yes. Describe the task and we will suggest the most relevant available browser tool."
+related_title: Helpful pages
+related:
+  - title: All free SEO tools
+    url: /tools/tools-overview.html
+  - title: Legal &amp; policies
+    url: /legal.html
 ---
 
-<section class="page-hero"><div class="shell"><span class="eyebrow">Support</span><h1>Have a question?</h1><p>Ask about a workflow, report format, or custom URL analysis.</p></div></section>
-<section class="content"><div class="shell form-layout"><aside class="context-panel"><span class="eyebrow">Need a workflow?</span><h2>Let’s make the next step clear.</h2><p>Tell us what you’re working with and what you want to learn from your URL list.</p><ul><li>Report format questions</li><li>Custom analysis ideas</li><li>Help choosing a tool</li></ul></aside><div class="form-shell"><div class="card form-card"><form action="{{ site.formspree_endpoint | default: 'https://formspree.io/f/your-id' }}" method="POST"><label for="contact-email">Your email</label><input id="contact-email" type="email" name="email" placeholder="you@example.com" required><label for="message">Message</label><textarea id="message" name="message" rows="7" placeholder="How can we help?" required></textarea><button class="button" type="submit">Send message</button></form></div></div></div></section>
+<section class="page-hero"><div class="shell"><span class="eyebrow">Support</span><h1>Have a question?</h1><p>Ask about one of our browser-based SEO tools.</p></div></section>
+<section class="content"><div class="shell form-layout"><aside class="context-panel"><span class="eyebrow">Need help?</span><h2>Let’s make the next step clear.</h2><p>Tell us what you’re working on and what you want to learn.</p><ul><li>Help choosing a tool</li><li>Questions about tool results</li><li>Suggestions for future tools</li></ul></aside><div class="form-shell"><div class="card form-card"><form action="{{ site.formspree_endpoint | default: 'https://formspree.io/f/your-id' }}" method="POST"><label for="contact-email">Your email</label><input id="contact-email" type="email" name="email" placeholder="you@example.com" required><label for="message">Message</label><textarea id="message" name="message" rows="7" placeholder="How can we help?" required></textarea><button class="button" type="submit">Send message</button></form></div></div></div></section>
+
+<section class="section alt"><div class="shell"><div class="section-heading"><div><span class="eyebrow">How we can help</span><h2>Questions we answer most often</h2></div><p>Tell us what you have and what you want to learn from it.</p></div><div class="cards">
+<article class="card"><h3>Choosing the right tool</h3><p>Describe the task and we will point you to a relevant browser-based tool.</p><a href="{{ site.baseurl }}/tools/tools-overview.html">Browse free SEO tools →</a></article>
+<article class="card"><h3>Questions about results</h3><p>If you are unsure how to interpret a tool’s output, tell us which tool you used and what you expected.</p><a href="{{ site.baseurl }}/tools/tools-overview.html">Browse the tools →</a></article>
+<article class="card"><h3>Suggestions</h3><p>Have an idea for a browser-based SEO utility? We welcome suggestions.</p><a href="{{ site.baseurl }}/tools/tools-overview.html">Explore available tools →</a></article>
+</div></div></section>
+
+{% include tool-guide.html %}

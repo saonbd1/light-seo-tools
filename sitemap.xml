@@ -1,0 +1,17 @@
+---
+layout: null
+permalink: /sitemap.xml
+sitemap: false
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- assign public_pages = site.html_pages | where_exp: "item", "item.noindex != true" | sort: "url" -%}
+{%- for item in public_pages %}{% unless item.url contains 'feed.xml' %}
+  <url>
+    <loc>{{ item.url | absolute_url | xml_escape }}</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>{% if item.url == '/' %}weekly{% else %}monthly{% endif %}</changefreq>
+    <priority>{% if item.url == '/' %}1.0{% elsif item.url contains '/tools/' %}0.8{% else %}0.5{% endif %}</priority>
+  </url>
+{% endunless %}{%- endfor %}
+</urlset>

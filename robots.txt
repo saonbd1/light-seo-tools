@@ -1,0 +1,13 @@
+---
+layout: null
+permalink: /robots.txt
+sitemap: false
+---
+User-agent: *
+Allow: /
+
+# Private / low-value pages are not for search engines.
+Disallow: /admin.html
+Disallow: /login.html
+
+Sitemap: {{ '/sitemap.xml' | absolute_url }}

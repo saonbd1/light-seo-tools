@@ -1,0 +1,111 @@
+---
+layout: default
+title: Sign in
+description: Sign in to the Light SEO Tools admin area.
+noindex: true
+---
+
+<section class="page-hero"><div class="shell"><span class="eyebrow">Admin access</span><h1>Sign in.</h1><p>Sign in with the email address that was invited to the admin area. The free browser tools stay open to everyone — this only unlocks the admin dashboard.</p></div></section>
+
+<section class="content"><div class="shell form-layout"><aside class="context-panel"><span class="eyebrow">How it works</span><h2>Credentials are checked by Supabase Auth.</h2><p>This page is a static file, so the check happens in your browser against Supabase and the session is reused on the admin dashboard.</p><ul><li>Sign in with a password or a one-time email link.</li><li>The session refreshes automatically and survives reloads.</li><li>Private report data stays protected by database policies.</li></ul></aside><div class="form-shell"><div class="card form-card"><div class="notice">Hiding the dashboard is not the same as protecting it. Keep Row Level Security enabled in Supabase so report data can only be read by signed-in users.</div><form id="login-form" novalidate><label for="login-email">Email</label><input id="login-email" type="email" name="email" autocomplete="email" placeholder="you@example.com" required><label for="login-password">Password</label><input id="login-password" type="password" name="password" autocomplete="current-password" placeholder="Your password"><div class="tool-actions"><button id="login-submit" class="btn-primary" type="submit">Sign in</button><button id="magic-link" class="btn-secondary" type="button">Email me a sign-in link</button></div></form><p class="auth-message" id="auth-message" role="status" aria-live="polite"></p><div id="signed-in" hidden><div class="notice">You are already signed in as <strong id="session-email">your account</strong>.</div><div class="tool-actions"><a class="btn-primary" id="session-continue" href="{{ site.baseurl }}/admin.html">Open the admin dashboard</a><button class="btn-secondary" id="sign-out" type="button">Sign out</button></div></div></div></div></div></section>
+
+<script src="{{ site.baseurl }}/assets/auth.js"></script>
+<script>
+(function () {
+  var form = document.getElementById("login-form");
+  var emailInput = document.getElementById("login-email");
+  var passwordInput = document.getElementById("login-password");
+  var submitButton = document.getElementById("login-submit");
+  var magicButton = document.getElementById("magic-link");
+  var message = document.getElementById("auth-message");
+  var signedIn = document.getElementById("signed-in");
+  var sessionEmail = document.getElementById("session-email");
+  var continueLink = document.getElementById("session-continue");
+  var signOutButton = document.getElementById("sign-out");
+
+  function setMessage(text, kind) {
+    message.textContent = text;
+    message.className = "auth-message" + (kind ? " is-" + kind : "");
+  }
+
+  function errorText(error, fallback) {
+    return error && error.message ? error.message : fallback;
+  }
+
+  /* Only allow relative paths inside this site, so ?next= cannot redirect elsewhere. */
+  function safeNextPath() {
+    var fallback = LSTAuth.path("/admin.html");
+    var next = new URLSearchParams(window.location.search).get("next") || "";
+    if (!next || next.charAt(0) !== "/" || next.indexOf("//") !== -1 || next.indexOf(":") !== -1) return fallback;
+    var base = LSTAuth.baseurl();
+    if (base && next.indexOf(base) !== 0) return fallback;
+    return next;
+  }
+
+  function showSession(session) {
+    form.hidden = true;
+    signedIn.hidden = false;
+    sessionEmail.textContent = session && session.user && session.user.email ? session.user.email : "your account";
+    continueLink.setAttribute("href", safeNextPath());
+    setMessage("");
+  }
+
+  if (!LSTAuth.isConfigured()) {
+    setMessage("Supabase Auth is not configured yet. Add supabase_url and supabase_anon_key to _config.yml (see INSTRUCTIONS.md, section 8).", "error");
+    submitButton.disabled = true;
+    magicButton.disabled = true;
+    return;
+  }
+
+  LSTAuth.bindNav();
+
+  LSTAuth.getSession().then(function (session) {
+    if (session) {
+      showSession(session);
+    } else if (window.location.hash.indexOf("error_description") !== -1) {
+      setMessage("That sign-in link is invalid or already used. Request a fresh link below.", "error");
+    } else {
+      setMessage("Enter your email and password to continue.");
+    }
+  });
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    var email = emailInput.value.trim();
+    var password = passwordInput.value;
+    if (!email) { setMessage("Enter your email address.", "error"); return; }
+    if (!password) { setMessage("Enter your password, or use the email link option.", "error"); return; }
+    submitButton.disabled = true;
+    setMessage("Checking your credentials…");
+    LSTAuth.signInWithPassword(email, password).then(function (session) {
+      showSession(session);
+      window.location.replace(safeNextPath());
+    }).catch(function (error) {
+      submitButton.disabled = false;
+      setMessage(errorText(error, "Sign in failed. Check your email and password."), "error");
+    });
+  });
+
+  magicButton.addEventListener("click", function () {
+    var email = emailInput.value.trim();
+    if (!email) { setMessage("Enter your email address first, then request the link.", "error"); return; }
+    magicButton.disabled = true;
+    setMessage("Sending a one-time sign-in link to " + email + "…");
+    LSTAuth.sendSignInLink(email, window.location.origin + safeNextPath()).then(function () {
+      setMessage("Check " + email + " for the sign-in link. It returns you to the admin dashboard.", "success");
+    }).catch(function (error) {
+      setMessage(errorText(error, "Could not send the link. Try again in a moment."), "error");
+    }).then(function () {
+      magicButton.disabled = false;
+    });
+  });
+
+  signOutButton.addEventListener("click", function () {
+    signOutButton.disabled = true;
+    LSTAuth.signOut().then(function () {
+      window.location.replace(LSTAuth.path("/login.html"));
+    });
+  });
+})();
+</script>
+

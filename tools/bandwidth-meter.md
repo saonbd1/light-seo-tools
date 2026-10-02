@@ -1,7 +1,36 @@
 ---
 layout: default
 title: Bandwidth Meter
-description: Measure the download size of a URL or page.
+seo_title: "Bandwidth Meter — Free Page Size Checker Tool | Light SEO Tools"
+description: "Measure how big a page or resource really is. Free browser-based bandwidth meter that reports download size in bytes, KB or MB plus the content type."
+tool: true
+guide:
+  eyebrow: Free browser helper
+  heading: Bandwidth Meter
+  what: "Fetch a URL and the meter reports the size of its response plus the content type, making it easy to catch bloated HTML, oversized stylesheets or heavy images."
+  steps:
+    - "Enter the page or asset URL you want to measure."
+    - "Click Measure and wait for the request to finish."
+    - "Read the formatted size and the content type."
+    - "Repeat for the largest assets on the page to find where the weight sits."
+  tips:
+    - "Keep HTML responses in the low tens of kilobytes. Markup approaching a megabyte is a red flag."
+    - "Compression matters more than raw size, so check whether your server sends gzip or Brotli before rewriting templates."
+    - "Measure the same URL before and after a change to prove the optimisation actually helped."
+faq:
+  - q: "Does the meter measure compressed size?"
+    a: "It measures the size of the response body it receives, which is the transfer size when the server compresses the response. Use it as a consistent comparison rather than a lab-grade number."
+  - q: "Can it measure images and stylesheets?"
+    a: "Yes. Any URL that returns a body can be measured, so paste an image or CSS file URL to check its weight."
+  - q: "Why does my result differ from PageSpeed Insights?"
+    a: "PageSpeed measures every request on the page, including third-party scripts. This meter measures one response at a time, so the two numbers answer different questions."
+related:
+  - title: Bing Image Grabber
+    url: /tools/bing-image-grabber.html
+  - title: Article Scraper
+    url: /tools/article-scraper.html
+  - title: Alive URL Checker
+    url: /tools/alive-url-checker.html
 ---
 
 <div class="page-hero"><div class="shell"><span class="eyebrow">Free browser helper</span><h1>Bandwidth Meter</h1><p class="hero-description">Fetch a URL and estimate its response size in bytes, KB, or MB.</p></div></div>
@@ -68,3 +97,5 @@ document.getElementById('run').addEventListener('click', async function () {
 });
 document.getElementById('clear').addEventListener('click', function () { document.getElementById('input').value = ''; document.getElementById('output').value = ''; document.getElementById('meta').style.display = 'none'; document.getElementById('status').style.display = 'none'; });
 </script>
+
+{% include tool-guide.html %}

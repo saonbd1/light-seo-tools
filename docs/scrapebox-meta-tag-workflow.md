@@ -1,5 +1,7 @@
 # Scrapebox Meta Tag Scraper Workflow
 
+> Archived: this workflow is retired and is not offered by the active site.
+
 ## Purpose
 
 Process a plain-text URL list in Scrapebox and export page metadata for delivery.

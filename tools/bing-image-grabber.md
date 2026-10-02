@@ -1,7 +1,36 @@
 ---
 layout: default
 title: Bing Image Grabber
-description: Extract image URLs from pasted HTML.
+seo_title: "Bing Image Grabber — Extract Image URLs Free | Light SEO Tools"
+description: "Collect every image URL from a page for free. Paste HTML or fetch a URL and get a deduplicated list of image sources, including lazy-load attributes."
+tool: true
+guide:
+  eyebrow: Free browser helper
+  heading: Bing Image Grabber
+  what: "Paste HTML or fetch a page and the grabber collects image source URLs, including common lazy-load attributes such as data-src and data-original, then returns one unique URL per line."
+  steps:
+    - "Paste the page source, or enter a URL and click Fetch Source."
+    - "Click Grab Images."
+    - "Review the unique image URL list and the total count."
+    - "Copy the list for auditing alt coverage, image sizes or CDN usage."
+  tips:
+    - "Compare the output with your media library to find images still served from a staging host or a third-party CDN."
+    - "Lazy-loaded images often hide in a data attribute, which is why the grabber checks more than the plain src."
+    - "Oversized hero images are a common speed problem — check the real transfer size with the Bandwidth Meter."
+faq:
+  - q: "Does the grabber download the images?"
+    a: "No. It only extracts the URLs so you can audit or review them. Nothing is saved to your machine."
+  - q: "Why are there fewer images than I can see on the page?"
+    a: "Images injected by JavaScript after load may not exist in the raw HTML. Use your browser's element inspector to copy the final markup, then paste that in."
+  - q: "Can I get alt text as well?"
+    a: "The Article Scraper and Link Extractor give more text-level detail. For a full image inventory across a site, request a processed crawl report."
+related:
+  - title: Bandwidth Meter
+    url: /tools/bandwidth-meter.html
+  - title: Article Scraper
+    url: /tools/article-scraper.html
+  - title: Alive URL Checker
+    url: /tools/alive-url-checker.html
 ---
 
 <div class="page-hero"><div class="shell"><span class="eyebrow">Free browser helper</span><h1>Bing Image Grabber</h1><p class="hero-description">Collect every image source URL from a page's HTML, deduplicated.</p></div></div>
@@ -94,3 +123,5 @@ document.getElementById('clear').addEventListener('click', function () {
   const s = document.getElementById('status'); s.textContent = ''; s.style.display = 'none';
 });
 </script>
+
+{% include tool-guide.html %}
