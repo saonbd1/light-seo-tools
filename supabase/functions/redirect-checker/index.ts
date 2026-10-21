@@ -66,7 +66,14 @@ Deno.serve(async (req: Request) => {
       };
 
       try {
-        let parsed = new URL(trimmed);
+        // Accept bare domains the same way the tool's other checkers do.
+        const candidate = /^[a-z][a-z0-9+.-]*:\/\//i.test(trimmed)
+          ? trimmed
+          : `https://${trimmed}`;
+        let parsed = new URL(candidate);
+        if (parsed.protocol !== "http:" && parsed.protocol !== "https:") {
+          throw new Error(`Unsupported protocol: ${parsed.protocol.replace(":", "")}`);
+        }
         let currentUrl = parsed.toString();
         let hops = 0;
 

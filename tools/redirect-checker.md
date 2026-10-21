@@ -98,6 +98,10 @@ related:
   border-left-color: #8b5cf6;
 }
 
+.redirect-result.status-303 {
+  border-left-color: #14b8a6;
+}
+
 .redirect-result.status-308 {
   border-left-color: #ec4899;
 }
@@ -149,7 +153,7 @@ const PROXY_HEADERS = {
 };
 
 document.getElementById('check').addEventListener('click', async function(){
-  const input = document.getElementById('input').value.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+  const input = document.getElementById('input').value.split(/\r?\n/).map(normalizeUrl).filter(Boolean);
   const resultsDiv = document.getElementById('results');
   const outputArea = document.getElementById('output');
 
@@ -187,7 +191,8 @@ document.getElementById('check').addEventListener('click', async function(){
     }
 
     const data = await response.json();
-    const items = data.results || [];
+    const items = Array.isArray(data.results) ? data.results : [];
+    if (items.length === 0) throw new Error(data.error || 'The proxy returned no results.');
 
     for (const item of items) {
       checkedCount++;
@@ -207,25 +212,29 @@ document.getElementById('check').addEventListener('click', async function(){
 
       if (isRedirect) {
         redirectCount++;
+        const chain = Array.isArray(item.chain) ? item.chain : [];
+        // The first hop carries the redirect type (301/302/307/308); the last hop is the final response.
+        const firstHop = chain[0];
+        // Count redirect responses only, so a single 301 is "1 hop", not 2 chain steps.
+        const redirectHops = chain.filter(function(step){ return step.status >= 300 && step.status < 400; }).length;
         const resultDiv = document.createElement('div');
-        const lastHop = item.chain[item.chain.length - 1];
-        const statusClass = 'status-' + (lastHop ? lastHop.status : 'error');
+        const statusClass = 'status-' + (firstHop ? firstHop.status : 'error');
         resultDiv.className = 'redirect-result ' + statusClass;
 
         let html = '<div class="redirect-result-url"><strong>URL:</strong> ' + escapeHtml(item.url) + '</div>';
-        html += '<div class="redirect-result-status">\u2197 ' + item.chain.length + ' hop' + (item.chain.length === 1 ? '' : 's') + ' \u2192 ' + statusCode + '</div>';
+        html += '<div class="redirect-result-status">\u2197 ' + redirectHops + ' hop' + (redirectHops === 1 ? '' : 's') + ' \u2192 ' + statusCode + '</div>';
         html += '<div class="redirect-result-chain"><strong>Final URL:</strong> ' + escapeHtml(item.finalUrl) + '</div>';
 
-        if (item.chain.length > 1) {
+        if (chain.length > 1) {
           html += '<div class="redirect-result-chain" style="margin-top:6px;"><strong>Chain:</strong></div>';
-          item.chain.forEach(function(step, idx) {
+          chain.forEach(function(step, idx) {
             html += '<div class="redirect-chain-step"><strong>' + (idx + 1) + '.</strong> ' + step.status + ' \u2192 ' + escapeHtml(step.url) + (step.location ? '<br>&nbsp;&nbsp;&nbsp;\u2192 ' + escapeHtml(step.location) : '') + '</div>';
           });
         }
 
         resultDiv.innerHTML = html;
         resultsDiv.appendChild(resultDiv);
-        results.push(item.url + ' \u2192 ' + item.chain.map(function(s){ return s.status; }).join(' \u2192 ') + ' \u2192 ' + item.finalUrl);
+        results.push(item.url + ' \u2192 ' + chain.map(function(s){ return s.status; }).join(' \u2192 ') + ' \u2192 ' + item.finalUrl);
       } else {
         const resultDiv = document.createElement('div');
         const statusClass = statusCode < 400 ? 'status-200' : 'status-error';
@@ -241,7 +250,7 @@ document.getElementById('check').addEventListener('click', async function(){
     const resultDiv = document.createElement('div');
     resultDiv.className = 'redirect-result status-error';
     const errorMsg = error.message || 'Unknown error';
-    resultDiv.innerHTML = '<div class="redirect-result-status">\u274C Request failed: ' + escapeHtml(errorMsg) + '</div><div class="redirect-result-chain">The redirect checker proxy could not be reached. Please try again.</div>';
+    resultDiv.innerHTML = '<div class="redirect-result-status">\u274C Request failed: ' + escapeHtml(errorMsg) + '</div><div class="redirect-result-chain">The redirect proxy did not respond. Retry in a moment; if it keeps failing the checker service is offline.</div>';
     resultsDiv.appendChild(resultDiv);
     results.push('Proxy error: ' + errorMsg);
   }
@@ -252,7 +261,7 @@ document.getElementById('check').addEventListener('click', async function(){
   document.getElementById('checked-count').textContent = checkedCount;
   document.getElementById('redirect-count').textContent = redirectCount;
   document.getElementById('error-count').textContent = errorCount;
-  document.getElementById('meta').style.display = checkedCount > 0 ? 'flex' : 'none';
+  document.getElementById('meta').style.display = (checkedCount > 0 || errorCount > 0) ? 'flex' : 'none';
   document.getElementById('copy').style.display = results.length > 0 ? 'block' : 'none';
 
   checkBtn.disabled = false;
@@ -276,6 +285,12 @@ document.getElementById('copy').addEventListener('click', function(){
   btn.textContent = 'Copied!';
   setTimeout(() => { btn.textContent = orig; }, 2000);
 });
+
+function normalizeUrl(raw) {
+  const value = String(raw || '').trim();
+  if (!value) return '';
+  return /^[a-z][a-z0-9+.-]*:\/\//i.test(value) ? value : 'https://' + value;
+}
 
 function escapeHtml(text) {
   const div = document.createElement('div');
