@@ -79,11 +79,19 @@ document.getElementById('run').addEventListener('click', function () {
   const html = document.getElementById('input').value;
   const doc = new DOMParser().parseFromString(html, 'text/html');
   const links = Array.from(doc.querySelectorAll('a'));
+  // Non-navigational hrefs (javascript:, mailto:, tel:, data:, blob:, #anchor) are not
+  // outbound links. Classifying them as external put pseudo-links in the export.
+  const NON_NAV = /^(javascript:|mailto:|tel:|sms:|data:|blob:|#)/i;
   const rows = links.map(function (a) {
     const href = a.getAttribute('href') || '';
+    const trimmed = href.trim();
     let type = 'empty';
-    if (href && baseHost) {
-      try { type = new URL(href, 'https://' + baseHost).hostname === baseHost ? 'internal' : 'external'; } catch (e) { type = 'invalid'; }
+    if (!trimmed) {
+      type = 'empty';
+    } else if (NON_NAV.test(trimmed)) {
+      type = 'skip';
+    } else if (baseHost) {
+      try { type = new URL(trimmed, 'https://' + baseHost).hostname === baseHost ? 'internal' : 'external'; } catch (e) { type = 'invalid'; }
     }
     return { href: href, type: type };
   });
@@ -96,7 +104,8 @@ document.getElementById('run').addEventListener('click', function () {
   resultsDiv.style.display = 'block';
 
   document.getElementById('output').value = '# External\n' + external.map(function (r) { return r.href; }).join('\n') + '\n\n# Internal\n' + internal.map(function (r) { return r.href; }).join('\n');
-  document.getElementById('total').textContent = rows.length;
+  // Count only real navigational links so total === internal + external.
+  document.getElementById('total').textContent = external.length + internal.length;
   document.getElementById('external').textContent = external.length;
   document.getElementById('internal').textContent = internal.length;
   document.getElementById('meta').style.display = 'flex';

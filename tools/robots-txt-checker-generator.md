@@ -221,6 +221,7 @@ function parseRobots(text) {
 
   const lines = text.split(/\r?\n/);
   let currentAgents = [];
+  let lastField = '';
   for (let line of lines) {
     const hashIdx = line.indexOf('#');
     if (hashIdx !== -1) line = line.slice(0, hashIdx);
@@ -233,17 +234,26 @@ function parseRobots(text) {
     if (!value) continue;
 
     if (field === 'user-agent') {
-      currentAgents = [value];
+      // Consecutive User-agent lines form one group; the first directive line ends
+      // the group. Overwriting here silently dropped rules from earlier agents.
+      if (lastField !== 'user-agent') currentAgents = [];
+      currentAgents.push(value);
       agents.add(value);
+      lastField = 'user-agent';
     } else if (field === 'disallow') {
+      lastField = field;
       disallow.push({ agents: currentAgents.slice(), path: value });
     } else if (field === 'allow') {
+      lastField = field;
       allow.push({ agents: currentAgents.slice(), path: value });
     } else if (field === 'sitemap') {
+      lastField = field;
       sitemaps.push(value);
     } else if (field === 'crawl-delay') {
+      lastField = field;
       crawlDelays.push(value);
     } else if (field === 'host') {
+      lastField = field;
       hosts.push(value);
     }
   }

@@ -47,7 +47,7 @@ related:
     <div class="tool-panel">
       <h2 class="section-title">Results</h2>
       <p class="section-desc">Alive vs. dead.</p>
-      <div class="result-meta" id="meta" style="display:none;"><span class="meta-item"><strong id="total">0</strong> checked</span><span class="meta-item"><strong id="alive">0</strong> alive</span><span class="meta-item"><strong id="dead">0</strong> dead</span></div>
+      <div class="result-meta" id="meta" style="display:none;"><span class="meta-item"><strong id="total">0</strong> checked</span><span class="meta-item"><strong id="alive">0</strong> alive</span><span class="meta-item"><strong id="dead">0</strong> dead</span><span class="meta-item"><strong id="unknown">0</strong> unknown</span></div>
       <div id="results" style="display:none;max-height:360px;overflow-y:auto;margin-bottom:12px;"></div>
       <textarea id="output" class="tool-input" rows="10" readonly placeholder="Copyable list will appear here"></textarea>
       <div class="tool-actions"><button id="copy" class="btn-secondary" style="display:none;">Copy</button></div>
@@ -65,16 +65,31 @@ related:
 
 <script>
 function escapeHtml(text) { const d = document.createElement('div'); d.textContent = text; return d.innerHTML; }
-async function checkAlive(url) {
+// A proxy failure is not proof that the target site is dead. Three states:
+// alive, dead (a real answer from the target), unknown (no usable answer).
+async function checkAliveOnce(url) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(function () { ctrl.abort(); }, 15000);
   try {
-    const r = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(url));
-    if (!r.ok) return { alive: false, code: r.status };
+    const r = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(url), { signal: ctrl.signal });
+    if (!r.ok) return { state: 'unknown', code: r.status };
     const data = await r.json();
-    const code = (data.status && data.status.http_code) || 0;
-    return { alive: code >= 200 && code < 400, code: code };
+    const code = (data && data.status && data.status.http_code) || 0;
+    if (!code) return { state: 'unknown', code: 0 };
+    return { state: (code >= 200 && code < 400) ? 'alive' : 'dead', code: code };
   } catch (e) {
-    return { alive: false, code: 0 };
+    return { state: 'unknown', code: 0 };
+  } finally {
+    clearTimeout(timer);
   }
+}
+async function checkAlive(url) {
+  let res = await checkAliveOnce(url);
+  if (res.state === 'unknown') {
+    await new Promise(function (r) { setTimeout(r, 1200); });
+    res = await checkAliveOnce(url);
+  }
+  return res;
 }
 document.getElementById('run').addEventListener('click', async function () {
   const urls = document.getElementById('input').value.split(/\r?\n/).map(function (s) { return s.trim(); }).filter(Boolean);
@@ -87,26 +102,33 @@ document.getElementById('run').addEventListener('click', async function () {
   status.textContent = 'Checking ' + urls.length + ' URLs...';
   status.style.display = 'block';
 
-  let alive = 0;
+  let alive = 0, dead = 0, unknown = 0;
   const rows = [];
   for (const url of urls) {
     const res = await checkAlive(url);
-    if (res.alive) alive++;
-    rows.push({ url: url, ok: res.alive, code: res.code });
-    const badge = res.alive ? '<span class="badge alive">alive</span>' : '<span class="badge dead">dead</span>';
+    if (res.state === 'alive') alive++;
+    else if (res.state === 'dead') dead++;
+    else unknown++;
+    rows.push({ url: url, state: res.state, code: res.code });
+    const badge = res.state === 'alive'
+      ? '<span class="badge alive">alive</span>'
+      : (res.state === 'dead' ? '<span class="badge dead">dead</span>' : '<span class="badge">unknown</span>');
     const item = document.createElement('div');
     item.className = 'link-result';
     item.innerHTML = '<div class="u">' + badge + ' <strong>' + res.code + '</strong> ' + escapeHtml(url) + '</div>';
     resultsDiv.appendChild(item);
     resultsDiv.style.display = 'block';
+    // Small gap between targets so a batch does not trip the proxy's rate limit.
+    await new Promise(function (r) { setTimeout(r, 250); });
   }
-  document.getElementById('output').value = rows.map(function (r) { return (r.ok ? 'alive' : 'dead') + '\t' + r.code + '\t' + r.url; }).join('\n');
+  document.getElementById('output').value = rows.map(function (r) { return r.state + '\t' + r.code + '\t' + r.url; }).join('\n');
   document.getElementById('total').textContent = rows.length;
   document.getElementById('alive').textContent = alive;
-  document.getElementById('dead').textContent = rows.length - alive;
+  document.getElementById('dead').textContent = dead;
+  document.getElementById('unknown').textContent = unknown;
   document.getElementById('meta').style.display = 'flex';
   document.getElementById('copy').style.display = rows.length ? 'block' : 'none';
-  status.textContent = 'Done: ' + alive + ' alive, ' + (rows.length - alive) + ' dead.';
+  status.textContent = 'Done: ' + alive + ' alive, ' + dead + ' dead, ' + unknown + ' unknown.';
   btn.disabled = false;
 });
 document.getElementById('clear').addEventListener('click', function () { document.getElementById('input').value = ''; document.getElementById('output').value = ''; document.getElementById('results').innerHTML = ''; document.getElementById('results').style.display = 'none'; document.getElementById('meta').style.display = 'none'; document.getElementById('copy').style.display = 'none'; document.getElementById('status').style.display = 'none'; });

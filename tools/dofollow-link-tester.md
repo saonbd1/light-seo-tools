@@ -76,7 +76,9 @@ document.getElementById('run').addEventListener('click', function () {
   const links = Array.from(doc.querySelectorAll('a'));
   const rows = links.map(function (a) {
     const href = a.getAttribute('href') || '';
-    const nofollow = /nofollow/i.test(a.getAttribute('rel') || '');
+    // rel="sponsored" and rel="ugc" are non-endorsed link attributes; Google treats
+    // them as nofollow-equivalent, so a link audit must not report them as dofollow.
+    const nofollow = /(?:nofollow|sponsored|ugc)/i.test(a.getAttribute('rel') || '');
     return { href: href, nofollow: nofollow };
   });
   const dofollowCount = rows.filter(function (r) { return !r.nofollow; }).length;
